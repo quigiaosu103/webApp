@@ -1,7 +1,10 @@
 <?php
 
  	require_once ('../admin/connection.php');
-	$sql = "SELECT * from apps ";
+	$role = $_POST['role'] ?? 'admin';
+	$sql = "SELECT * from apps";
+	if($role == 'user')
+		$sql = "SELECT * from apps where isConfirmed = 1";
 	$result = $conn->query($sql);
 	$data = array();
 	if ($result->num_rows > 0) {

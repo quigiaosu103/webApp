@@ -113,86 +113,8 @@
         echo $_SESSION['userName'];
       ?>'
       const id = data.app.id;
-      
-      document.querySelector('.app-infor__name').innerText= data.app.appName;
-      document.querySelector('.downloadBtn').setAttribute('href', data.app.srcDownload)
-      document.querySelector('.app-image img').setAttribute('src', data.app.srcImage)
-      function renderCmt() {
-        const html = data.comment.map((cmt)=> `
-          <div class="cmt">
-            <div class="cmt__user">
-                ${cmt.userName==userName?'<button class="rmCmt" onclick="removeCmt(this)">x</button>' :''}
-                <div class="cmt__user__image"></div>
-                <span class="cmt__user_name">${cmt.userName}</span>
-            </div>
-            <div class="cmt__content">
-                ${cmt.content}
-            </div>
-          </div>`)
-        document.querySelector('.cmts').innerHTML = html.join('')
-      }
-      
-      function addComment() {
-        const addBtn = document.querySelector('.addNewCmt')
-        addBtn.addEventListener('click',(e)=>{
-
-          const mess = document.querySelector('.new-comment>input').value
-
-          if(mess) {
-            $.post('/API/addCmt.php', {
-              id: id,
-              content: mess
-            }, (data, status)=> {
-              console.log(data)
-              document.querySelector('.cmts').innerHTML += `
-                <div class="cmt">
-                  <div class="cmt__user">
-                      <button class="rmCmt" onclick="removeCmt(this)">x</button>
-                      <div class="cmt__user__image"></div>
-                      <span class="cmt__user_name"><?php
-                        echo $_SESSION['userName'];
-                      ?></span>
-                  </div>
-                  <div class="cmt__content">
-                      ${mess}
-                  </div>
-                </div>`
-                
-              document.querySelector('.new-comment>input').value =''
-              document.querySelector('.new-comment>input').disabled = true
-
-            }, 'json')
-          }
-        })
-      }
-
-      function removeCmt(e) {
-        const element = e.parentElement.parentElement
-        $.post('/API/removeItem.php', {
-          type: 'cmt',
-          id: id,
-          userName: userName
-        }, (data)=> {
-          element.style.display='none';
-          document.querySelector('.new-comment>input').disabled = false
-        }, 'json')
-      }
-
-      function isCmted() {
-          let isCmt =false
-          data.comment.map((cmt)=>{
-            if(cmt.userName == userName) isCmt = true
-          })
-          if(isCmt) {
-            document.querySelector('.new-comment>input').disabled = true
-          }
-        
-      }
-
-      renderCmt()
-      addComment()
-      isCmted()
 
     </script>
+    <script src="/handleLogic/app.js"></script>
 </body>
 </html>

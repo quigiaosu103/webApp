@@ -48,6 +48,9 @@
               <li class="nav-item">
                 <a class="nav-link" href="./appManagerment.php">Admin</a>
               </li>
+              <li class="search">
+                <input type="text" id="find">
+              </li>
             </ul>
           </div>
         </div>
@@ -57,150 +60,48 @@
           <div class="body col-11">
             <div class="common-apps">
                 <h4 class="common-apps__title">Ứng dụng tải nhiều</h4>
-                <div class="row common-apps__apps-bar">
-
-                    
-                    
-                    
-                </div>
+                <div class="row common-apps__apps-bar"> </div>
             </div>
 
-              <div class="app-type p-2">
-                  <div class="app-type__games">
-                      <h4 class="app-type--title">
-                          Trò chơi
-                      </h4>
-                      <div class="app-type__games-containt apps-box"></div>
-                  </div>
-
-                  <div class="app-type__serviceapps">
-                        <h4 class="app-type--title">
-                            Ứng dụng dịch vụ
-                        </h4>
-                        <div class="app-type__serviceapps-containt apps-box"></div>
-                    </div>
-
-
-                    <div class="app-type__shoppingapps">
-                        <h4 class="app-type--title">
-                            Ứng dụng mua sắm
-                        </h4>
-                        <div class="app-type__shoppingapps-containt apps-box"></div>
-                    </div>
-
-                    <div class="app-type__socialnwapps">
-                        <h4 class="app-type--title">
-                            Mạng xã hội
-                        </h4>
-                        <div class="app-type__socialnwapps-containt apps-box"></div>
-                    </div>
-                  
-                </div>
-                  
-
+            <div class="app-type p-2">
+              <div class="app-type__games">
+                  <h4 class="app-type--title">
+                      Trò chơi
+                  </h4>
+                  <div class="app-type__games-containt apps-box"></div>
               </div>
+
+              <div class="app-type__serviceapps">
+                    <h4 class="app-type--title">
+                        Ứng dụng dịch vụ
+                    </h4>
+                    <div class="app-type__serviceapps-containt apps-box"></div>
+                </div>
+
+
+                <div class="app-type__shoppingapps">
+                    <h4 class="app-type--title">
+                        Ứng dụng mua sắm
+                    </h4>
+                    <div class="app-type__shoppingapps-containt apps-box"></div>
+                </div>
+
+                <div class="app-type__socialnwapps">
+                    <h4 class="app-type--title">
+                        Mạng xã hội
+                    </h4>
+                    <div class="app-type__socialnwapps-containt apps-box"></div>
+                </div>
+              
+            </div>
+              
+
           </div>
+        </div>
       </div>
       
-      <script>
-          $.get('http://localhost:8080/API/getApps.php', (data, status)=> {
-                let gms = ''
-                let mxh = ''
-                let dv = ''
-                let ms = ''
-                data.data.map((app)=> {
-                    if(app.TYPE == 'gms'){
-                        gms += `<a href="App.php?id=${app.id}" class="app-type__game--containt app-containt col-4">
-                              <div class="game-containt__img img-color"></div>
-                              <div class="infor">
-                                <div class="main-img" "><img src="${app.srcImage}" width="56" height="56" border-radius="4"></image></div>
-                                <div class="infor-text">
-                                    <h5 class="game-containt__name">${app.appName}</h5>
-                                    <span class="game-containt__username">${app.userName}</span>    
-                                </div>    
-                            </div>
-                          </a>`
-                    }
-                    if(app.TYPE == 'ms') {
-                        ms += `<a href="App.php?id=${app.id}" class="shoppingapp--containt app-containt col-4">
-                                <div class="shoppingapp-containt__img img-color"  ></div>
-                                <div class="infor">
-                                    <div class="main-img" "><img src="${app.srcImage}" width="56" height="56" border-radius="4"></image></div>
-                                    <div class="infor-text">
-                                        <h5 class="shoppingapp-containt__name">${app.appName}</h5>
-                                        <span class="shoppingapp-containt__username">${app.userName}</span>    
-                                    </div>    
-                                </div>
-                            </a>`
-                    }
-
-                    if(app.TYPE == 'dv'){
-                        dv+= `<a href="App.php?id=${app.id}" class="app-type__serviceapp--containt app-containt col-4">
-                                <div class="serviceapp-containt__img img-color">
-                                
-                                </div>
-                                <div class="infor">
-                                    <div app-main-image>
-                                      <img src="${app.srcImage}" width="56" height="56" border-radius="4"></image> 
-
-                                    </div>
-
-                                    <div class="infor-text">
-                                        <h5 class="serviceapp-containt__name">${app.appName}</h5>
-                                        <span class="serviceapp-containt__username">${app.userName}</span>    
-                                    </div>    
-                                </div>
-                              </a>`
-                    }
-
-                    if(app.TYPE == 'mxh') {
-                        mxh += `<a href="App.php?id=${app.id}" class="socialnwapp--containt app-containt col-4">
-                                <div class="socialnwapp-containt__img img-color" ></div>
-                                <div class="infor">
-                                    <div class="main-img"><img src="${app.srcImage}" width="56" height="56" border-radius="4"></image></div>
-                                    <div class="infor-text">
-                                        <h5 class="socialnwapp-containt__name">${app.appName}</h5>
-                                            <span class="socialnwapp-containt__username">${app.userName}</span>    
-                                    </div>    
-                                </div>
-                            </a>`
-                    }
-
-
-                })
-
-                $('.app-type__games-containt').append(gms)
-                $('.app-type__serviceapps-containt').append(dv)
-                $('.app-type__shoppingapps-containt').append(ms)
-                $('.app-type__socialnwapps-containt').append(mxh)
-          }, 'json')
-
-            let limitItems = 9
-            selectApps(limitItems)
-            function selectApps(num) {
-              $.post('http://localhost:8080/API/selectApps.php', {
-                limitItems: num
-                }, (data, status)=> {
-                    let id =0
-                    const apps = data.data.map((app)=>{
-                        id++;
-                        return `${id%3==1? '<div class="common-apps col-4">':''}
-                        <a class="common-app" href="App.php?id=${app.id}">
-                            <span class="common-app_top">${id}</span>
-                            <div class="common-app_image"><img src="${app.srcImage}" width="56" height="56" border-radius="4></image></div>
-                            <div class="common-app_infor">
-                                <span class="common-app_infor--name">${app.appName}</span>
-                                <span class="common-app_infor--type">${app.TYPE}</span>
-                                <span class="common-app_infor--download">${app.download}</span>
-                            </div>
-                        </a>   
-                        ${id%3==0? '</div>':''} 
-                    `})
-                    console.log(apps.join(''))
-                    document.querySelector('.common-apps__apps-bar').innerHTML = apps.join('')
-                }, 'json')
-            }
-      </script>
+      <script defer src="/handleLogic/index.js"></script>
+      <script defer src="/handleLogic/search.js"></script>
       
 </body>
 </html>
