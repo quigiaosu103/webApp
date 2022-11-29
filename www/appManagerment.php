@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="./appManagerment.css">
+	<link rel="stylesheet" href="style/appManagerment.css">
 	<title>AppTeq</title>
 </head>
 
@@ -22,6 +22,7 @@
 	<button onclick="getApps()">get giaosu apps</button>
 	<button onclick="getImages()">get Image</button>
 	<button onclick="formAdd()">Add app</button>
+	<button onclick="formUser()">Register</button>
 
 	<div class="box">
 		<div class="form">
@@ -42,13 +43,48 @@
 			<button onclick="addApp()">Add</button>
 		</div>
 	</div>
+
+	<div class="box2">
+		<div class="form2">
+			<form action="">
+				<label for="userName">Tên đăng nhập: </label>
+				<input type="text" name="userName" id="userName"><br>
+				<label for="pw">Mật khẩu:</label>
+				<input type="password" name="pw" id="linkapp"> <br>
+				<label for="passConfirm">Nhập lại mật khẩu:</label>
+				<input type="password" name="passConfirm" id="passConfirm"> <br>
+			</form>
+			<button onclick="addUser()">Add</button>
+		</div>
+	</div>
 	<script>
 		function formAdd() {
 			$('.box').css('display','flex');
 		}
 
+		function formUser() {
+			$('.box2').css('display','flex');
+		}
+
+		function addUser() {
+			const userName = $('.form2 input[name="userName"]').val()
+			const pass = $('.form2 input[name="pw"]').val()
+			const passConfirm = $('.form2 input[name="passConfirm"]').val()
+			if(pass === passConfirm) {
+				$.post('/Api/addUser.php', {
+					userName: userName,
+					pw: pass
+				}, ()=> {
+					alert('successfully')
+				})
+			}else {
+				alert('fail')
+			}
+			console.log(userName);
+		}
+
 		function addApp() {
-			$.post('http://localhost:8080/Api/addApp.php', {
+			$.post('/Api/addApp.php', {
 				name: $('input#name').val(),
 				linkapp: $('input#linkapp').val(),
 				linkimg: $('input#linkimg').val(),
@@ -68,7 +104,7 @@
 		}
 
 		function getImages() {
-			$.post('http://localhost:8080/Api/getImage.php', {
+			$.post('/Api/getImage.php', {
 				appId: 1
 			},function(data, stauts) {
 				var html=''

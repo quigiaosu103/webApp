@@ -96,7 +96,7 @@
                     </div>
                   
                 </div>
-
+                  
 
               </div>
           </div>
@@ -110,54 +110,60 @@
                 let ms = ''
                 data.data.map((app)=> {
                     if(app.TYPE == 'gms'){
-                        gms += `<div class="app-type__game--containt app-containt col-4">
+                        gms += `<a href="App.php?id=${app.id}" class="app-type__game--containt app-containt col-4">
                               <div class="game-containt__img img-color"></div>
                               <div class="infor">
-                                <div class="main-img" "></div>
+                                <div class="main-img" "><img src="${app.srcImage}" width="56" height="56" border-radius="4"></image></div>
                                 <div class="infor-text">
                                     <h5 class="game-containt__name">${app.appName}</h5>
                                     <span class="game-containt__username">${app.userName}</span>    
                                 </div>    
                             </div>
-                          </div>`
+                          </a>`
                     }
                     if(app.TYPE == 'ms') {
-                        ms += `<div class="shoppingapp--containt app-containt col-4">
+                        ms += `<a href="App.php?id=${app.id}" class="shoppingapp--containt app-containt col-4">
                                 <div class="shoppingapp-containt__img img-color"  ></div>
                                 <div class="infor">
-                                    <div class="main-img" "></div>
+                                    <div class="main-img" "><img src="${app.srcImage}" width="56" height="56" border-radius="4"></image></div>
                                     <div class="infor-text">
                                         <h5 class="shoppingapp-containt__name">${app.appName}</h5>
                                         <span class="shoppingapp-containt__username">${app.userName}</span>    
                                     </div>    
                                 </div>
-                            </div>`
+                            </a>`
                     }
 
                     if(app.TYPE == 'dv'){
-                        dv+= `<div class="app-type__serviceapp--containt app-containt col-4">
-                            <div class="serviceapp-containt__img img-color"></div>
-                            <div class="infor">
-                                <div class="main-img" "></div>
-                                <div class="infor-text">
-                                    <h5 class="serviceapp-containt__name">${app.appName}</h5>
-                                    <span class="serviceapp-containt__username">${app.userName}</span>    
-                                </div>    
-                            </div>
-                        </div>`
+                        dv+= `<a href="App.php?id=${app.id}" class="app-type__serviceapp--containt app-containt col-4">
+                                <div class="serviceapp-containt__img img-color">
+                                
+                                </div>
+                                <div class="infor">
+                                    <div app-main-image>
+                                      <img src="${app.srcImage}" width="56" height="56" border-radius="4"></image> 
+
+                                    </div>
+
+                                    <div class="infor-text">
+                                        <h5 class="serviceapp-containt__name">${app.appName}</h5>
+                                        <span class="serviceapp-containt__username">${app.userName}</span>    
+                                    </div>    
+                                </div>
+                              </a>`
                     }
 
                     if(app.TYPE == 'mxh') {
-                        mxh += `<div class="socialnwapp--containt app-containt col-4">
+                        mxh += `<a href="App.php?id=${app.id}" class="socialnwapp--containt app-containt col-4">
                                 <div class="socialnwapp-containt__img img-color" ></div>
                                 <div class="infor">
-                                    <div class="main-img" "></div>
+                                    <div class="main-img"><img src="${app.srcImage}" width="56" height="56" border-radius="4"></image></div>
                                     <div class="infor-text">
                                         <h5 class="socialnwapp-containt__name">${app.appName}</h5>
                                             <span class="socialnwapp-containt__username">${app.userName}</span>    
                                     </div>    
                                 </div>
-                            </div>`
+                            </a>`
                     }
 
 
@@ -181,7 +187,7 @@
                         return `${id%3==1? '<div class="common-apps col-4">':''}
                         <a class="common-app" href="App.php?id=${app.id}">
                             <span class="common-app_top">${id}</span>
-                            <div class="common-app_image"></div>
+                            <div class="common-app_image"><img src="${app.srcImage}" width="56" height="56" border-radius="4></image></div>
                             <div class="common-app_infor">
                                 <span class="common-app_infor--name">${app.appName}</span>
                                 <span class="common-app_infor--type">${app.TYPE}</span>

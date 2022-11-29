@@ -77,10 +77,10 @@
         <div class="app">
             <div class="app-infor">
                 <h2 class="app-infor__name">Appname</h2>
-                <button class="btn btn-primary">Download</button>
+                <a class="btn btn-primary downloadBtn">Download</a>
             </div>
             <div class="app-image">
-
+              <img class="radius-6" width="180" height="180" border-radius="6"></image>
             </div>
         </div>
         
@@ -108,13 +108,15 @@
       const data = (<?php
         echo $_SESSION['pageData'];
         ?>)
+        console.log(data)
       const userName = '<?php
         echo $_SESSION['userName'];
       ?>'
       const id = data.app.id;
-
+      
       document.querySelector('.app-infor__name').innerText= data.app.appName;
-
+      document.querySelector('.downloadBtn').setAttribute('href', data.app.srcDownload)
+      document.querySelector('.app-image img').setAttribute('src', data.app.srcImage)
       function renderCmt() {
         const html = data.comment.map((cmt)=> `
           <div class="cmt">
@@ -155,7 +157,7 @@
                       ${mess}
                   </div>
                 </div>`
-
+                
               document.querySelector('.new-comment>input').value =''
               document.querySelector('.new-comment>input').disabled = true
 
