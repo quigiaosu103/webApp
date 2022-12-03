@@ -3,6 +3,7 @@
     require_once ('admin/connection.php');
     $id2 = $_SESSION['id']??'';
     $id = $_GET['id']?? $id2;
+    $userName = $_SESSION['userName'] ?? 'zasdnjakens1231ascax';
     if($id !='') {
         $_SESSION['id']=$id;
         $sql = 'select *from apps where id ='.$id;
@@ -15,7 +16,13 @@
         while($mt = $comments->fetch_assoc()) {
             $arr[] = $mt;
         }
-        $_SESSION['pageData'] = json_encode(array('comment'=>$arr, 'app'=> $app));
+        $sql = 'select count(*) as count from favorite where appId = ? and userName = ?';
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $id, $userName);
+        $stmt->execute();
+        $stmt = $stmt->get_result();
+        $count = $stmt->fetch_assoc();
+        $_SESSION['pageData'] = json_encode(array('comment'=>$arr, 'app'=> $app, 'count'=>$count));
       }
     // s
   ?>
@@ -78,6 +85,10 @@
             <div class="app-infor">
                 <h2 class="app-infor__name">Appname</h2>
                 <a class="btn btn-primary downloadBtn">Download</a>
+                <div class="btnComponent">
+                  <span class="liked">Da thich</span>
+                  <span class="unlike">Thich</span>
+                </div>
             </div>
             <div class="app-image">
               <img class="radius-6" width="180" height="180" border-radius="6"></image>
@@ -108,9 +119,8 @@
       const data = (<?php
         echo $_SESSION['pageData'];
         ?>)
-        console.log(data)
       const userName = '<?php
-        echo $_SESSION['userName'];
+        echo $_SESSION['userName']??'';
       ?>'
       const id = data.app.id;
 

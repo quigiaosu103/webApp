@@ -111,6 +111,7 @@ function renderApps() {
     })
  }
 
+
   search()
   renderApps();
   renderCommonApps()

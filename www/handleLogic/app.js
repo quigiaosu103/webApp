@@ -72,6 +72,46 @@ function isCmted() {
     }
   
 }
+function handleLike() {
+  const likeBtn = document.querySelector('.liked')
+  const unLikeBtn = document.querySelector('.unlike')
+  if(data.count.count==1){
+    unLikeBtn.classList.add('disabled')
+  }else{
+    likeBtn.classList.add('disabled')
+  }
+
+  likeBtn.addEventListener('click', (e) => {
+    if(userName === '') {
+      location.href = 'loginForm.php'
+    }else{
+      $.post('/API/removeItem.php', {
+        type: 'like',
+        id: id,
+        userName: userName
+      }, ()=> { 
+        unLikeBtn.classList.remove('disabled')
+        likeBtn.classList.add('disabled')
+      })
+    }
+  })
+  
+  unLikeBtn.addEventListener('click', (e) => {
+    if(userName === '') {
+      location.href = 'loginForm.php'
+    }else{
+      $.post('API/addFavorite.php', {
+        id: id
+      }, ()=> {
+        unLikeBtn.classList.add('disabled')
+        likeBtn.classList.remove('disabled')    
+      })
+    }
+  })
+
+
+}
+handleLike()
 
 renderCmt()
 addComment()
