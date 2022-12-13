@@ -145,6 +145,51 @@
     
 }
 
+.carousel-item {
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px;
+    width: 100%;
+    height: 420px;
+    background-color: #00C2FF;
+}
+
+#carouselExampleIndicators {
+    height: 420px;
+    width: 75%;
+}
+
+.favorite-apps__list-apps {
+    padding: 0 16px;
+}
+
+.favorite-apps__list-apps__info__name {
+    font-weight: 600;
+}
+
+.favorite-apps__list-apps__info__user-name {
+    font-weight: 600;
+    font-size: 12px;
+}
+
+
+.favorite-apps__list-app__info {
+    margin-left: 8px;
+}
+
+.favorite-apps__list-app__image {
+    width: 54px;
+    height: 54px;
+    background-position: center;
+    background-size: cover;
+    border-radius: 4px;
+}
+
+.favorite-apps__list-app {
+    display: flex;
+    margin-bottom: 18px;
+}
+
 a {
     text-decoration: none;
     color: black;

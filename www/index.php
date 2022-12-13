@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STAPPS</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://getbootstrap.com/docs/5.2/assets/css/docs.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <link rel="stylesheet" href="./style/style.css">
 </head>
 <body>
@@ -58,6 +58,91 @@
       
       <div class="container justify-content-center d-flex mt-3">
           <div class="body col-11">
+            <div class="most-favodite-apps col-12 d-flex">
+              <!-- ================================================================ -->
+              <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div style="background-image: url('./images/tft.jpg');" class="carousel-item active">
+                  </div>
+                  <div style="background-image: url('./images/pubg.jpg');" class="carousel-item">
+                  </div>
+                  <div style="background-image: url('./images/fo4.jpg');" class="carousel-item">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+
+              
+
+              <div class="favorite-apps__list-apps">
+                <a href="#" class="favorite-apps__list-app">
+                  <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
+                  <div class="favorite-apps__list-app__info">
+                    <span class="favorite-apps__list-apps__info__name">League of legends</span> <br>
+                    <span class="favorite-apps__list-apps__info__user-name">Riot</span>
+                  </div>
+                </a>
+                <a href="#" class="favorite-apps__list-app">
+                  <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
+                  <div class="favorite-apps__list-app__info">
+                    <span class="favorite-apps__list-apps__info__name">League of legends</span> <br>
+                    <span class="favorite-apps__list-apps__info__user-name">Riot</span>
+                  </div>
+                </a>
+                <a href="#" class="favorite-apps__list-app">
+                  <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
+                  <div class="favorite-apps__list-app__info">
+                    <span class="favorite-apps__list-apps__info__name">League of legends</span> <br>
+                    <span class="favorite-apps__list-apps__info__user-name">Riot</span>
+                  </div>
+                </a>
+                <a href="#" class="favorite-apps__list-app">
+                  <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
+                  <div class="favorite-apps__list-app__info">
+                    <span class="favorite-apps__list-apps__info__name">League of legends</span> <br>
+                    <span class="favorite-apps__list-apps__info__user-name">Riot</span>
+                  </div>
+                </a>
+                <a href="#" class="favorite-apps__list-app">
+                  <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
+                  <div class="favorite-apps__list-app__info">
+                    <span class="favorite-apps__list-apps__info__name">League of legends</span> <br>
+                    <span class="favorite-apps__list-apps__info__user-name">Riot</span>
+                  </div>
+                </a>
+                <a href="#" class="favorite-apps__list-app">
+                  <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
+                  <div class="favorite-apps__list-app__info">
+                    <span class="favorite-apps__list-apps__info__name">League of legends</span> <br>
+                    <span class="favorite-apps__list-apps__info__user-name">Riot</span>
+                  </div>
+                </a>
+              </div>
+              
+              
+              
+              
+              
+              
+              <!-- ================================================================ -->
+            </div>
+          
+
+
+
+
             <div class="common-apps">
                 <h4 class="common-apps__title">Ứng dụng tải nhiều</h4>
                 <div class="row common-apps__apps-bar"> </div>
