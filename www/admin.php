@@ -60,6 +60,7 @@
                   <th></th>
                 </tr>
               </thead>
+              <tbody class="statistical"> </tbody>
             </table>
 
             <table class="table">
@@ -98,6 +99,7 @@
                   <th></th>
                 </tr>
               </thead>
+              <tbody class="statistical"> </tbody>
             </table>
 
             <table class="table">

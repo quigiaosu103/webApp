@@ -75,11 +75,28 @@ function renderUsers() {
 	}, "json")
 }
 
-
 function addEvent() {
 	document.querySelector('.usersManager').addEventListener('click', e=> renderUsers())
 	document.querySelector('.appsManager').addEventListener('click',e=> renderData())
 }
+
+function getStatistical() {
+	$.get('/Api/statistical.php', function(data) {
+		console.log(data)
+		document.querySelector('.apps-statistical .statistical').innerHTML=`<tr>
+			<td>${data.apps.totalApps}</td>
+			<td>${data.apps.totalDownload}</td>
+		</tr>`
+
+		document.querySelector('.users-statistical .statistical').innerHTML=`<tr>
+			<td>${data.users.totalUsers}</td>
+		</tr>`
+
+		console.log(document.querySelector('.users-statistical .statistical'))
+	}, 'json')
+}
+
+getStatistical()
 
 addEvent()
 
