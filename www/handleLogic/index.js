@@ -6,6 +6,7 @@ function renderApps() {
           let mxh = ''
           let dv = ''
           let ms = ''
+          console.log(data)
           data.data.map((app)=> {
               if(app.TYPE == 'gms'){
                   gms += `<a href="App.php?id=${app.id}" class="app-type__game--containt app-containt col-4">

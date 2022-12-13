@@ -46,7 +46,7 @@
                 ?></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./appManagerment.php">Admin</a>
+                <a class="nav-link" href="./admin.php">Admin</a>
               </li>
               <li class="search">
                 <input type="text" id="find">

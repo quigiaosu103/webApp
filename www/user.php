@@ -14,29 +14,35 @@
         <!-- Category -->
         <div id="nav" class="nav col-2">
             <div class="container__image-user">
-                <img src="/images/user-image.png" alt="" class="image-user">
             </div>
+
+            <!-- Mục login đang là display none -->
+            <div class="login-link">
+                <a href="#">Login</a>
+            </div>
+
             <ul class="category--list">
-                <ul class="category--item category-active">
+                <li class="category--item category-active">
                     <span class="category--text">Apps</span>
-                </ul>
-                <ul class="category--item">
+                </li>
+                <li class="category--item">
                     <span class="category--text">Favorites</span>
-                </ul>
-                <ul class="category--item">
+                </li>
+                <li class="category--item">
                     <span class="category--text">Wish list</span>
-                </ul>
-                <ul class="category--item">
+                </li>
+                <li class="category--item">
                     <span class="category--text">Add apps</span>
-                </ul>
-                <ul class="category--item">
+                </li>
+                <li class="category--item">
                     <span class="category--text">Setting</span>
-                </ul>
+                </li>
+                <div class="category--item category--item--logout">
+                    <a href="#" class="category--text">Log Out</a> 
+                </div>
             </ul>
     
-            <div class="category--item category--item--logout">
-                <a href="#" class="category--text">Log Out</a> 
-            </div>
+            
     
         </div>
         <!--  -->
