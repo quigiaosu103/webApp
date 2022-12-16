@@ -14,7 +14,7 @@
             $_SESSION['userName'] = $username;
             header("Location: ../".$_SESSION['currPage']);
         }else{
-            header("Location: ../loginForm.php?message=fail");
+            header("Location: ../loginForm.php?message=".$username);
         }
     }
     // echo json_encode(array('username'=>$username, 'pw'=>$pasword));

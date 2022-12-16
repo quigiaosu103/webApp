@@ -58,6 +58,9 @@
 
         <!-- Category -->
         <div id="nav" class="nav col-2">
+            <div class="backHome">
+                <a href="index.php" class="home">Home</a>
+            </div>
             <div class="container__image-user">
             </div>
             <ul class="category--list">
@@ -286,5 +289,6 @@
 
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="/handleLogic/user.js"></script>
+    <script src="/handleLogic/addapp.js"></script>
 </body>
 </html>

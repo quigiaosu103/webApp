@@ -1,7 +1,67 @@
+:root {
+    --primary-background-gradient: linear-gradient(180deg, #85FCBB, #1ED4ED)
+}
+
+@media screen and (max-width: 700px) {
+    .navbar{
+        flex-wrap: nowrap !important;
+    }
+
+    #mynavbar{
+        display: flex !important;
+    }
+    .searchBox{
+        width: 200px !important;
+    }
+    .searchBox:hover input#search{
+        width: 200px !important;
+    }
+}
+
+html ::-webkit-scrollbar {
+    display: none;
+}
+
+html {
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none; 
+}
+
+body {
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+nav {
+    /* background-color: #004643; */
+    /* background-image: var(--primary-background-gradient); */
+
+}
+
+.header-title {
+    background-image: var(--primary-background-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* animation: rotation 2s infinite linear; */
+    
+}
+
 .body {
+    padding: 12px;
+    z-index: 2;
+    background: rgba(255, 255, 255, 0.2);
     /* background-color: black; */
     
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    /* background-color: #004643; */
 }
 
 .app-type>div {
@@ -22,6 +82,64 @@
     height: 208px;
     background-image: linear-gradient(145deg, #BE03A1, #5270D7, #00C2FF);
     border-radius: 6px;
+}
+
+.userNameSelection svg{
+    font-size: 12px;
+    width: 12px;
+    margin-right: 8px;
+}
+
+.userNameSelection {
+    position: relative;
+} 
+
+ 
+.isLoggedIn:hover .logout {
+    display: block;
+}
+
+.logout {
+    position: absolute;
+    right: 0px;
+    top: 36px;
+    display: block;
+    background-color: #ccc;
+    padding: 4px 8px;
+    border-radius: 2px;
+    display: none;
+    cursor: pointer;
+    color: #000;
+}
+
+.logout:hover {
+    color: #000;
+    background-image: var(--primary-background-gradient);
+    box-shadow: 2px 2px 2px rgba(81, 81, 81, 0.2);
+}
+
+.logInOut {
+    position: relative;
+    padding: 0 32px;
+    cursor: pointer;
+}
+
+.logInOut::before {
+    content: '';
+    width: 80%;
+    height: 24px;
+    background-color: transparent;
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+
+.isLoggedIn:hover .logout{
+    display: block!important;
+}
+
+.logout svg {
+    width: 12px;
 }
 
 .app-containt {
@@ -85,7 +203,7 @@
   }
 
 .common-apps {
-
+    margin-top: 12px;
 }
 
 .common-app {
@@ -102,7 +220,7 @@
 }
 
 .common-app_top {
-
+    
 }
 
 .common-app_image {
@@ -121,7 +239,7 @@
 }
 
 .common-app_infor {
-
+    
 }
 
 .common-app_infor--name {
@@ -139,7 +257,7 @@
 
 .common-app_infor--download {
     font-weight: 600;
-
+    
     font-size: 12px;
     display: block;
     
@@ -188,6 +306,8 @@
 .favorite-apps__list-app {
     display: flex;
     margin-bottom: 18px;
+    margin-top: 20px;
+    margin-left: 16px;
 }
 
 a {
@@ -195,6 +315,134 @@ a {
     color: black;
 }
 
-img {
+img{
     border-radius: 10px;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
 }
+*{
+    transition: 0.2s;
+    user-select: none;
+}
+
+.holder{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 1%;    
+    border-radius: 4px;
+    border: solid 1px #ccc; 
+    box-shadow: 2px 2px 2px rgba(0, 0 , 0,  .2);
+}
+
+
+#moreBtn{
+    width: 150px;
+    height: 40px;
+    margin-top:10px;
+    margin-left: 20px;
+    text-align: center ;
+    border:none;
+    border-radius: 4px;
+}
+
+.appBasket{
+    width: 98%;
+    height: 96%;
+    margin: 1% 4% 1% 1%;
+    display: flex;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    scroll-behavior:smooth;
+}
+
+#appBundle{
+    margin-top: 20px;
+    margin-left: 20px;
+    text-align: center;
+}
+
+#appBundle img:hover{
+    box-shadow: 5px 5px 10px rgb(24, 23, 23);
+}
+#appBundle a:hover{
+    color: rgb(64, 119, 145);
+    font-weight: bold;
+}
+.app-containt {
+    display: flex;
+    border-radius: 6px;
+    flex-direction: column;
+    padding: 6px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.searchBox{
+    width: 300px;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+}
+#search{
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-image: var(--primary-background-gradient);
+    
+    border: none;
+    font-size: 10pt;
+    float: right;
+    color: #262626;
+    padding-left: 10px;
+    padding-right: 35px;
+    border-radius: 5px;
+    transition: width .55s ease;
+}
+
+.searchBox input#search::-webkit-input-placeholder {
+    color: #65737e;
+}
+
+#searchIcon{
+    position:absolute;
+    right: 12px;
+    margin-top: 6px;
+    z-index: 1;
+    color: #4f5b66;
+    font-size: 20px;
+}
+
+.searchBox input#search:focus, .searchBox input#search:active{
+    outline:none;
+}
+.searchBox:hover input#search{
+    outline:none; 
+    width: 300px;
+}
+.searchBox:hover .icon{
+    color: #93a2ad;
+}
+
+.arrow{
+    float: right;
+    width: 40px;
+    height: 40px;
+    margin-top:10px;
+    border-radius: 50%;
+    border: none;
+}
+
+
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }

@@ -1,0 +1,1 @@
+làm tới select app cho app thích nhiều nhất, làm chung trong file selectApp.php
