@@ -1,5 +1,5 @@
 function searchHandle() {
-    let html = data.data.map((app, id)=> `${id%3==1? '<div class="common-apps col-4">':''}
+    let html = data.data.map((app, id)=> `
     <a class="common-app" href="App.php?id=${app.id}">
         <span class="common-app_top">${id}</span>
         <div class="common-app_image"><img src="${app.srcImage}" width="56" height="56" border-radius="4"></image></div>
@@ -9,9 +9,21 @@ function searchHandle() {
             <span class="common-app_infor--download">${app.download}</span>
         </div>
     </a>   
-    ${id%3==0? '</div>':''} 
     `)  
     document.querySelector('.found-apps').innerHTML = html.join('')
 }
 
+
+function search() {
+    const inputSearchElement = document.querySelector('#search')
+    console.log('search: ', inputSearchElement)
+    inputSearchElement.addEventListener('keypress', event => {
+        if (event.keyCode == 13) {
+            const value = inputSearchElement.value
+            location.href= `Api/searchApps.php?data=${value}`
+        }
+      })
+  }
+  
+  search()
 searchHandle()

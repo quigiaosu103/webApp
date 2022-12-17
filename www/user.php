@@ -32,17 +32,8 @@
             return $random_string;
         }
 
-        $host = 'mysql-server'; // tên mysql server
-        $user = 'root';
-        $pass = 'root';
-        $db = 'apps-management'; // tên databse
+        require_once('./admin/connection.php');
     
-        $conn = new mysqli($host, $user, $pass, $db);
-        $conn->set_charset("utf8");
-
-        if ($conn->connect_error) {
-            die('Không thể kết nối database: ' . $conn->connect_error);
-        }
 
         $uploadPathImg = "appContainer/images/Img/";
         $uploadPathFile = "appContainer/File/";
@@ -288,6 +279,7 @@
         const userNameLogedin = '<?php
             echo $_SESSION['userName']??'';
         ?>'
+        console.log(userNameLogedin);
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="/handleLogic/user.js"></script>

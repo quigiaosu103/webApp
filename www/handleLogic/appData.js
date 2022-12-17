@@ -170,6 +170,18 @@ function sameTypeApps() {
   }, 'json')
 }
 
+function search() {
+  const inputSearchElement = document.querySelector('#search')
+  console.log('search: ', inputSearchElement)
+  inputSearchElement.addEventListener('keypress', event => {
+      if (event.keyCode == 13) {
+          const value = inputSearchElement.value
+          location.href= `Api/searchApps.php?data=${value}`
+      }
+    })
+}
+
+search()
 
 sameTypeApps()
 handleLike()

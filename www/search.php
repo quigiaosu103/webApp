@@ -8,6 +8,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STAPPS</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -76,21 +78,23 @@
     </div>
   </nav>
       
-      <div class="container justify-content-center d-flex mt-3">
-          <div class="body col-11">
-            <div class="found-apps">
-                
-            </div>
-          </div>
+  <div class="container justify-content-center d-flex mt-3">
+      <div class="body col-11">
+        <div class="found-apps">
+            
         </div>
       </div>
-
-      <script>
-          const data = <?php
-            echo $_SESSION['searchData']?? ''
-          ?>
-      </script>
-      <script defer src="/handleLogic/search.js"></script>
+    </div>
+  </div>
+  <div class="footer">
+    <span>Laptrinhwebungdung@tdtu</span>
+  </div>
+<script>
+    const data = <?php
+      echo $_SESSION['searchData']?? ''
+    ?>
+</script>
+<script defer src="/handleLogic/search.js"></script>
       
 </body>
 </html>
