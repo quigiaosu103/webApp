@@ -83,7 +83,7 @@ function renderApps() {
           $('#app-type__shoppingapps-containt').append(ms)
           $('#app-type__socialnwapps-containt').append(mxh)
     }, 'json')
-  }
+}
   
   function renderCommonApps() {
     let limitItems = 9
@@ -92,6 +92,7 @@ function renderApps() {
       $.post('/API/selectApps.php', {
         limitItems: num
         }, (data, status)=> {
+            console.log('data: ', data)
             let id =0
             const apps = data.data.map((app)=>{
                 id++;
@@ -107,7 +108,18 @@ function renderApps() {
                 </a>   
                 ${id%3==0? '</div>':''} 
             `})
+
+            const voteApps = data.data2.map(app=> `
+                <a href="App.php?id=${app.id}" class="favorite-apps__list-app">
+                    <div class="favorite-apps__list-app__image" style="background-image: url(${app.srcImage});"></div>
+                        <div class="favorite-apps__list-app__info">
+                        <span class="favorite-apps__list-apps__info__name">${app.appName}</span> <br>
+                        <span class="favorite-apps__list-apps__info__user-name">${app.userName}</span>
+                    </div>
+                </a>
+            `)
             document.querySelector('.common-apps__apps-bar').innerHTML = apps.join('')
+            document.querySelector('.list-vote-apps__containt').innerHTML = voteApps.join('')
         }, 'json')
     }
   }

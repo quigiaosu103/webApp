@@ -1,118 +1,203 @@
-document.querySelector('.app-infor__name').innerText= data.app.appName;
-document.querySelector('.downloadBtn').setAttribute('href', data.app.srcDownload)
-document.querySelector('.app-image img').setAttribute('src', data.app.srcImage)
-function renderCmt() {
-  const html = data.comment.map((cmt)=> `
-    <div class="cmt">
-      <div class="cmt__user">
-          ${cmt.userName==userName?'<button class="rmCmt" onclick="removeCmt(this)">x</button>' :''}
-          <div class="cmt__user__image"></div>
-          <span class="cmt__user_name">${cmt.userName}</span>
-      </div>
-      <div class="cmt__content">
-          ${cmt.content}
-      </div>
-    </div>`)
-  document.querySelector('.cmts').innerHTML = html.join('')
-}
+let wish = 0;
+let fav = 0;
+let userStar = 0;
 
-function addComment() {
-  const addBtn = document.querySelector('.addNewCmt')
-  addBtn.addEventListener('click',(e)=>{
+window.onload = function() {
+    document.getElementById("btn1").click();
+    
+    const slider = document.querySelector("#appBasket");
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    
+    slider.addEventListener("mousedown",(e)=>{
+        slider.style.scrollBehavior = "initial";
+        isScrolled = true;
+        isDown = true;
+        startX = e.pageX - slider.offsetLeft;
+        scrollLeft = slider.scrollLeft;
 
-    const mess = document.querySelector('.new-comment>input').value
+    });
 
-    if(mess) {
-      $.post('/API/addCmt.php', {
-        id: id,
-        content: mess
-      }, (data, status)=> {
-        console.log(data)
-        document.querySelector('.cmts').innerHTML += `
-          <div class="cmt">
-            <div class="cmt__user">
-                <button class="rmCmt" onclick="removeCmt(this)">x</button>
-                <div class="cmt__user__image"></div>
-                <span class="cmt__user_name"><?php
-                  echo $_SESSION['userName'];
-                ?></span>
-            </div>
-            <div class="cmt__content">
-                ${mess}
-            </div>
-          </div>`
-          
-        document.querySelector('.new-comment>input').value =''
-        document.querySelector('.new-comment>input').disabled = true
+    slider.addEventListener("mouseleave",()=>{
+        isDown = false;
+    });
 
-      }, 'json')
+    slider.addEventListener("mouseup",(e)=>{
+        slider.style.scrollBehavior = "smooth";
+        isDown = false;
+    });
+
+    slider.addEventListener("mousemove",(e)=>{
+        if(!isDown){
+            return 0;
+        };
+        e.preventDefault();
+        const x = e.pageX - slider.offsetLeft;
+        const walk = x - startX;
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
+
+
+};
+
+function change(type){
+    switch(type){
+        case 1:{
+            if (wish == 0){
+                document.getElementById("wishlist").className= "fas";
+                document.getElementById("wishlist").style.color = "#ff002d";
+                likeAction(1)
+                wish = 1;
+            }
+            else{
+                document.getElementById("wishlist").className = "far";
+                document.getElementById("wishlist").style.color = "black";
+                likeAction(0)
+                wish = 0;
+            }
+            break;
+        }
+        case 2:{
+            if (fav == 0){
+                document.getElementById("favorite").className = "fas";
+                document.getElementById("favorite").style.color = "orange";
+                fav = 1;
+            }
+            else{
+                document.getElementById("favorite").className = "far";
+                document.getElementById("favorite").style.color = "black";
+                fav = 0;
+            }
+            break;
+        }
     }
-  })
-}
 
-function removeCmt(e) {
-  const element = e.parentElement.parentElement
-  $.post('/API/removeItem.php', {
-    type: 'cmt',
-    id: id,
-    userName: userName
-  }, (data)=> {
-    element.style.display='none';
-    document.querySelector('.new-comment>input').disabled = false
-  }, 'json')
-}
+};
 
-function isCmted() {
-    let isCmt =false
-    data.comment.map((cmt)=>{
-      if(cmt.userName == userName) isCmt = true
-    })
-    if(isCmt) {
-      document.querySelector('.new-comment>input').disabled = true
+
+function changeStarCl(star,mode){
+    var idNum = star.id;
+    var temp = document.getElementById("userRateBox");
+    var stars = temp.getElementsByTagName("a");
+    switch(mode){
+        case 1:
+            if (userStar == 0){
+                for(let i = 0; i <= idNum - 1;i++){
+                    stars[i].style.color = "gold";
+                }
+            }
+            break;
+        case 2:
+            if (userStar == 0){
+                for(let i = 0; i <= stars.length - 1;i++){
+                    stars[i].style.color = "black";
+                }
+            }
+            break;
+        case 3:
+            if (userStar == 0){
+                for(let i = 0; i <= idNum - 1;i++){
+                    stars[i].className = "fas rate";
+                    stars[i].style.color = "gold";
+                }
+                userStar = 1;
+            }
+            else{
+                for(let i = 0; i <= stars.length - 1;i++){
+                    stars[i].className = "far rate";
+                }
+                for(let i = 0;i <= idNum - 1; i ++){
+                    stars[i].style.color = "gold";
+                }
+                userStar = 0;
+            }
+            break;
     }
-  
-}
-function handleLike() {
-  const likeBtn = document.querySelector('.liked')
-  const unLikeBtn = document.querySelector('.unlike')
-  if(data.count.count==1){
-    unLikeBtn.classList.add('disabled')
-  }else{
-    likeBtn.classList.add('disabled')
-  }
+};
 
-  likeBtn.addEventListener('click', (e) => {
-    if(userName === '') {
-      location.href = 'loginForm.php'
-    }else{
-      $.post('/API/removeItem.php', {
-        type: 'like',
-        id: id,
-        userName: userName
-      }, ()=> { 
-        unLikeBtn.classList.remove('disabled')
-        likeBtn.classList.add('disabled')
-      })
+function infoBtnClick(x){
+    x = x.id;
+    var tabs = document.getElementById("info").getElementsByClassName("subInfoTab");
+    var mark;
+    switch(x){
+        case "btn1":
+            mark = 0;
+            break;
+        case "btn2":
+            mark = 1;
+            break;
+        case "btn3":
+            mark = 2;
+            break;
     }
-  })
-  
-  unLikeBtn.addEventListener('click', (e) => {
-    if(userName === '') {
-      location.href = 'loginForm.php'
-    }else{
-      $.post('API/addFavorite.php', {
-        id: id
-      }, ()=> {
-        unLikeBtn.classList.add('disabled')
-        likeBtn.classList.remove('disabled')    
-      })
+    tabs[mark].style.display = "flex";
+    for(let i = 0; i <= tabs.length - 1;i++){
+        if(i == mark){
+            continue;
+        }
+        tabs[i].style.display = "none";
     }
-  })
+    
+};
 
+function scrollDiv(btn,direction){
+    let pr = btn.parentElement.parentElement.children[1];
+    let childWidth = btn.parentElement.parentElement.children[1].children[0].offsetWidth ;
+
+    switch(direction){
+        case 'left':
+            pr.scrollBy(-(childWidth*2),0);
+            break;
+        case 'right':
+            pr.scrollBy(childWidth*2,0);
+            break;
+    }
+}
+
+function addCmt(x){
+    let cmt = x.parentElement.children[1].value;
+
+    let node = document.createElement('div');
+    node.className = "comment";
+
+    let a = document.createElement('a');
+    a.href = "javascript:void(0)";
+    a.style = "text-decoration:none;";
+
+    let img = document.createElement('img');
+    img.src ="appContainer/images/gms/tft.jpg"; 
+    img.alt = "User";
+    img.style = "width:40px;margin: 0 0 0 20px;";
+    img.className = "rounded-pill";
+    
+    a.appendChild(img);
+
+    node.appendChild(a);
+
+    let cmtContainer = document.createElement('div');
+    cmtContainer.id = "chat";
+
+    text = document.createTextNode(cmt);
+    cmtContainer.appendChild(text);
+
+    node.appendChild(cmtContainer);
+
+
+    btn = document.createElement('button');
+    btn.className = "btn btn-primary deleteCmt";
+    btn.setAttribute('onclick','dltCmt(this)');
+    btn.appendChild(document.createTextNode("Delete")); 
+
+    node.appendChild(btn);
+
+    let cmtSession = document.getElementById("commentSection");
+    cmtSession.appendChild(node);
 
 }
-handleLike()
 
-renderCmt()
-addComment()
-isCmted()
+function dltCmt(x){
+    let pr = x.parentElement;
+    pr.remove();
+}

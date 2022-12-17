@@ -104,8 +104,9 @@
       
 
         <div class="favorite-apps__list-apps">
-          <p style = "font-weight: bold;">Ứng dụng được yêu thích nhiều nhất:</p>
+          <p style = "font-weight: bold;">Ứng dụng được đánh giá tốt:</p>
 
+          <div class="list-vote-apps__containt">
           <a href="#" class="favorite-apps__list-app">
             <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
             <div class="favorite-apps__list-app__info">
@@ -134,13 +135,8 @@
               <span class="favorite-apps__list-apps__info__user-name">Riot</span>
             </div>
           </a>
-          <a href="#" class="favorite-apps__list-app">
-            <div class="favorite-apps__list-app__image" style="background-image: url('./appContainer/images/gms/tft.jpg');"></div>
-            <div class="favorite-apps__list-app__info">
-              <span class="favorite-apps__list-apps__info__name">League of legends</span> <br>
-              <span class="favorite-apps__list-apps__info__user-name">Riot</span>
-            </div>
-          </a>
+          
+          </div>
         </div>
         
         
@@ -249,6 +245,9 @@
       </div>
     </div>
   </div>
+  <div class="footer">
+        <span>Laptrinhwebungdung@tdtu</span>
+    </div>
 
   
   <script defer src="/handleLogic/index.js"></script>

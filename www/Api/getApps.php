@@ -1,8 +1,10 @@
 <?php
-
  	require_once ('../admin/connection.php');
 	$role = $_POST['role'] ?? 'admin';
+	$type = $_POST['type'] ?? 'gms';
 	$sql = "SELECT * from apps";
+if ($type != '')
+	$sql = "select * from apps where TYPE = '" . $type . "'"; ;
 	if($role == 'user')
 		$sql = "SELECT * from apps where isConfirmed = 1";
 	$result = $conn->query($sql);
@@ -17,5 +19,6 @@
 	else {
 		echo "Khong có dữ liệu";
 	}
+	
 
 ?>

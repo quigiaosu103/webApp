@@ -301,13 +301,17 @@ nav {
     background-position: center;
     background-size: cover;
     border-radius: 4px;
+    border-radius: 4px;
 }
 
 .favorite-apps__list-app {
     display: flex;
-    margin-bottom: 18px;
-    margin-top: 20px;
     margin-left: 16px;
+    padding: 12px;
+}
+
+.favorite-apps__list-app:hover {
+    background-color: #eee;
 }
 
 a {
@@ -434,6 +438,16 @@ img{
     margin-top:10px;
     border-radius: 50%;
     border: none;
+}
+
+.footer {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    align-items: center;
+    border-top: solid 2px #000;
 }
 
 
