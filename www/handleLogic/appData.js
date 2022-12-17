@@ -9,17 +9,33 @@ const likeBtn = document.querySelector('.like')
 const unLikeBtn = document.querySelector('.unlike')
 
 function renderCmt() {
-  const html = data.comment.map((cmt)=> `
-    <div class="cmt">
-      <div class="cmt__user">
-          ${cmt.userName==userName?'<button class="rmCmt" onclick="removeCmt(this)">x</button>' :''}
-          <div class="cmt__user__image"></div>
-          <span class="cmt__user_name">${cmt.userName}</span>
-      </div>
-      <div class="cmt__content">
-          ${cmt.content}
-      </div>
-    </div>`)
+  const html = data.comment.map((cmt)=>{ 
+    if(cmt.userName==userName){
+      document.querySelector('.myCmt').innerHTML=`
+        <div class = "comment">
+          <span style="text-decoration:none;">
+            <img src="./images/defaultAvatar.png" alt="User" style="width:40px;margin: 0 0 0 20px;" class="rounded-pill"> 
+          </span>
+          <div id = "chat">
+              ${cmt.content}
+          </div>
+          <button onclick = "removeCmt(this)" class="btn btn-primary deleteCmt">Delete</button>
+        </div>
+      `
+      return ''
+    }
+  return `
+        <div class = "comment">
+          <span style="text-decoration:none; min-width: 160px">
+            <img src="./images/defaultAvatar.png" alt="User" style="width:40px;margin: 0 0 0 20px;" class="rounded-pill"> 
+            <span style="font-weight: 500; margin-left: 12px;" class="comment__userName">${cmt.userName}</span>
+          </span>
+          <div id = "chat">
+              ${cmt.content}
+          </div>
+        </div>
+      `})
+  
   document.querySelector('.cmts').innerHTML = html.join('')
 }
 
@@ -58,7 +74,7 @@ function addComment() {
 }
 
 function removeCmt(e) {
-  const element = e.parentElement.parentElement
+  const element = e.parentElement
   $.post('/API/removeItem.php', {
     type: 'cmt',
     id: id,
@@ -75,7 +91,7 @@ function isCmted() {
       if(cmt.userName == userName) isCmt = true
     })
     if(isCmt) {
-      document.querySelector('.new-comment>input').disabled = true
+      document.querySelector('.userCommentHolder>input').disabled = true
     }
   
 }

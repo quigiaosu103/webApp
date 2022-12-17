@@ -70,7 +70,7 @@
             class="nav-link userNameSelection" 
             href="<?php
               if(!isset($_SESSION['userName'])){
-                  $_SESSION['currPage'] = 'App.php';
+                  $_SESSION['currPage'] = 'app.php';
                   echo 'loginForm.php'; 
               }
             ?>"
@@ -82,15 +82,25 @@
                 echo '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>'.$_SESSION['userName'];
             ?>
 
+
       </a>
-      <a href='admin/logout.php?currPage=App.php' class="logout">
+      <a href='admin/logout.php?currPage=app.php' class="logout">
         <svg svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96C43 32 0 75 0 128V384c0 53 43 96 96 96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H96c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32h64zM504.5 273.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32H320v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z"/></svg>
         Đăng xuất
       </a>
         </span>
         
 
-        <a class="navbar-brand" href="./user.php" style = "margin-left:1%">
+        <a 
+          class="navbar-brand" href="<?php
+            if(isset($_SESSION['userName']))
+              echo './user.php';
+            else{ 
+              $_SESSION['currPage'] = 'app.php';
+              echo 'loginForm.php'; 
+            }
+          ?>" 
+          style = "margin-left:1%">
             <img src="images/defaultAvatar.png" id = "userImg" alt="User" style="width:40px;" class="rounded-pill"> 
         </a>
     </div>
@@ -221,17 +231,9 @@
             <button class="btn btn-primary addNewCmt" onclick = "addCmt(this)">Comment</button>
         </div>
 
-        <div class="cmts">
-            <div class = "comment">
-                <a href = "javascript:void(0)" style="text-decoration:none;">
-                    <img src="appContainer/images/gms/tft.jpg" alt="User" style="width:40px;margin: 0 0 0 20px;" class="rounded-pill"> 
-                </a>
-                <div id = "chat">
-                    Hello
-                </div>
-                <button onclick = "dltCmt(this)" class="btn btn-primary deleteCmt">Delete</button>
-            </div>
-        </div>
+        <div class="myCmt"></div>
+
+        <div class="cmts"> </div>
 
     </div>
 

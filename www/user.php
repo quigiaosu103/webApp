@@ -1,5 +1,37 @@
 <?php
+    session_start();
     if (isset($_POST['upload'])) {
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+
+        function upload($file) {
+            $name = $file['name'];
+            $ex = substr($name, strrpos($name, '.'));
+
+            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+            $uploadPathImg = "appContainer/images/Img/";
+            $uploadPathFile = "appContainer/File/";
+
+            if ($ex == '.png' || $ex == '.jpg') {
+                $srcDownload = $uploadPathImg.generate_string($permitted_chars).$ex;
+                move_uploaded_file($file["tmp_name"], $srcDownload);
+            }
+            else {
+                $srcDownload = $uploadPathFile.generate_string($permitted_chars).$ex;
+                move_uploaded_file($file["tmp_name"], $srcDownload);
+            }
+        }
+        
+        function generate_string($input, $strength = 16) {
+            $input_length = strlen($input);
+            $random_string = '';
+            for($i = 0; $i < $strength; $i++) {
+                $random_character = $input[mt_rand(0, $input_length - 1)];
+                $random_string .= $random_character;
+            }
+         
+            return $random_string;
+        }
+
         $host = 'mysql-server'; // tên mysql server
         $user = 'root';
         $pass = 'root';
@@ -12,34 +44,59 @@
             die('Không thể kết nối database: ' . $conn->connect_error);
         }
 
-        $uploadPath = "uploads/";
+        $uploadPathImg = "appContainer/images/Img/";
+        $uploadPathFile = "appContainer/File/";
 
         $appname = $_POST['appname'];
         $apptype = $_POST['apptype'];
         $description = $_POST['description'];
+        
         $apk = $_FILES["apk"];
         $icon = $_FILES['icon'];
         $appimage = $_FILES['appimage'];
         $size = $apk['size'];
 
-        $srcDownload = $uploadPath.$apk['name'];
-        $srcImage = $uploadPath.$appimage['name'];
 
-        // move_uploaded_file($apk["tmp_name"], $srcDownload);
-        // move_uploaded_file($appimage["tmp_name"], $uploadPath.$icon['name']);
-        // move_uploaded_file($icon["tmp_name"], $srcImage);
+        // doi ten file khi upload file
+        $apkName = $_FILES["apk"];
+
+        // echo substr($apkName['name'], strrpos($apkName['name'], '.'));
+        // echo substr($apk['name'], strrpos($apk['name'], '.'));
+        // echo substr($icon['name'], strrpos($icon['name'], '.'));
+
+        upload($apk);
+        upload($icon);
+        upload($appimage);
+
+        // $apkdoc = explode('.', $apkName);
+        // echo($apkdoc);
+        // $iconName = $_FILES['icon'];
+        // $iconName = explode('.', $iconName);
+        // $appimageName = $_FILES['appimage'];
+        // $appimageName = explode('.', $appimageName);
         
-        move_uploaded_file($apk["tmp_name"], $srcDownload);
-        move_uploaded_file($appimage["tmp_name"], $srcImage);
-        move_uploaded_file($icon["tmp_name"], $uploadPath.$icon['name']);
+        // $extApk = end($apkName);    
+        // $extIcon = end($iconName);
+        // $extAppImage = end($appimageName);
+
+        // $newApkName = md5(uniqid()).'.'.$extApk;
+        // $newIconName = md5(uniqid()).'.'.$extIcon;
+        // $newAppImageName = md5(uniqid()).'.'.$extAppImage;
+
+        // $srcDownload = $uploadPathFile.$apk['name'];
+        // $srcImage = $uploadPathImg.$appimage['name'];
+        
+        // move_uploaded_file($apk["tmp_name"], $srcDownload);
+        // move_uploaded_file($appimage["tmp_name"], $srcImage);
+        // move_uploaded_file($icon["tmp_name"], $uploadPath.$icon['name']);
 
         // $data = "('$appname','$srcDownload','$srcImage', '$description', '', '$apptype', '$size')";
         // $sqll = "INSERT INTO `apps`(`appName`, `srcDownload`, `srcImage`, `decsription`,`userName`,`TYPE`,`size`) VALUES ".$data;
         // if ($conn->query($sqll) === TRUE) {
-        //     // header("da ve trang chu");
-        //     // exit();
+        //     header("link trang chu"); // dua link trang chu de chay vao
+        //     exit();
         // } else {
-        //     $error = "$conn->error";
+        //    $error = "$conn->error";
         // }
     }
 ?>
@@ -59,7 +116,7 @@
         <!-- Category -->
         <div id="nav" class="nav col-2">
             <div class="backHome">
-                <a href="index.php" class="home">Home</a>
+                <a href="index.php" class="home"><img src="./images/logo2.png" alt="" style="width: 132px;"></a>
             </div>
             <div class="container__image-user">
             </div>
@@ -74,19 +131,9 @@
                         <span class="category--text">Favorites</span>
                     </li>
                 </a>
-                <a href="?page=wishlist">
-                    <li id="wishlist_category" class="category--item">
-                        <span class="category--text">Wish list</span>
-                    </li>
-                </a>
                 <a href="?page=addapp">
                     <li id="addapp_category" class="category--item">
                         <span class="category--text">Add App</span>
-                    </li>
-                </a>
-                <a href="?page=setting">
-                    <li id="setting_category" class="category--item">
-                        <span class="category--text">Setting</span>
                     </li>
                 </a>
                 <div class="category--item category--item--logout">
@@ -111,17 +158,10 @@
             </div>
             <!-- List App -->
             <div id="listapp" class="container__list-apps container-page">
-                <div class="grid__row">
+                <div class="grid__row users-app-container">
                     <!-- Item -->
                 <!-- Back end render data vào đây -->
-                <a href="" class="col-2 container__app">
-                    <div class="container__image-app">
-                        <img src="/images/empty.png" alt="" class="image-app">
-                    </div>
-                    <p class="name-app">Name App</p>
-                    <!-- Rate -->
-                    <span class="rate-app">4.7</span>
-                </a>
+                
                 <!-- item -->
                 <a href="" class="col-2 container__app">
                     <div class="container__image-app">
@@ -195,7 +235,7 @@
                         <!--  -->
                         <div class="add-app__group-input grid__row">
                             <label class="add-app__label col-3" for="apk">Upload file .apk:</label>
-                            <input name="apk" id="apk" type="file" class="add-app__input col-5" accept=".apk">
+                            <input name="apk" id="apk" type="file" class="add-app__input col-5" accept=".zip .apk"/>
                         </div>
                         <!--  -->
                         <div class="add-app__group-input grid__row">
@@ -286,9 +326,12 @@
         </div>
         <!-- Add apps -->
     </div>
-
+    <script>
+        const userNameLogedin = '<?php
+            echo $_SESSION['userName']??'';
+        ?>'
+    </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="/handleLogic/user.js"></script>
-    <script src="/handleLogic/addapp.js"></script>
 </body>
 </html>

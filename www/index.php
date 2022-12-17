@@ -66,7 +66,16 @@
         </span>
         
 
-        <a class="navbar-brand" href="./user.php" style = "margin-left:1%">
+        <a 
+          class="navbar-brand" href="<?php
+            if(isset($_SESSION['userName']))
+              echo './user.php';
+            else{ 
+              $_SESSION['currPage'] = 'index.php';
+              echo 'loginForm.php'; 
+            }
+          ?>" 
+          style = "margin-left:1%">
             <img src="images/defaultAvatar.png" id = "userImg" alt="User" style="width:40px;" class="rounded-pill"> 
         </a>
     </div>
