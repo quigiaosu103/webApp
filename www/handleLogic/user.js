@@ -57,4 +57,23 @@ function getUsersApps(){
         document.querySelector('.users-app-container').innerHTML = html.join('')
     }, 'json')
 }
+
+function getFavoriteApps() {
+    console.log('get')
+    $.post('./Api/getFavoriteApps.php', {
+        userName: userNameLogedin
+    }, data=> {
+        const html = data.data.map(app=> `
+        <a href="" class="col-2 container__app">
+            <div class="container__image-app">
+                <img src="${app.srcImage}" alt="" class="image-app">
+            </div>
+            <p class="name-app">${app.appName}</p>
+            <span class="rate-app">${app.userName}</span>
+        </a>
+        `)
+        document.querySelector('.favorite-app-container').innerHTML = html.join('')
+    }, 'json')
+}
 getUsersApps()
+getFavoriteApps()

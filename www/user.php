@@ -106,6 +106,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <link rel="stylesheet" href="/style/user.css">
     <link rel="stylesheet" href="/font/fontawesome/css/all.min.css">
     <title>User</title>
@@ -137,7 +138,7 @@
                     </li>
                 </a>
                 <div class="category--item category--item--logout">
-                    <a href="#" class="category--text">Log Out</a> 
+                    <a href="./admin/logout.php" class="category--text">Log Out</a> 
                 </div>
             </ul>
     
@@ -158,56 +159,13 @@
             </div>
             <!-- List App -->
             <div id="listapp" class="container__list-apps container-page">
-                <div class="grid__row users-app-container">
-                    <!-- Item -->
-                <!-- Back end render data vào đây -->
-                
-                <!-- item -->
-                <a href="" class="col-2 container__app">
-                    <div class="container__image-app">
-                        <img src="/images/empty.png" alt="" class="image-app">
-                    </div>
-                    <p class="name-app">Name App</p>
-                    <span class="rate-app">4.7</span>
-                </a>
-                <!--  -->
-                <a href="" class="col-2 container__app">
-                    <div class="container__image-app">
-                        <img src="/images/empty.png" alt="" class="image-app">
-                    </div>
-                    <p class="name-app">Name App</p>
-                    <span class="rate-app">4.7</span>
-                </a>
-
-                <a href="" class="col-2 container__app">
-                    <div class="container__image-app">
-                        <img src="/images/empty.png" alt="" class="image-app">
-                    </div>
-                    <p class="name-app">Name App</p>
-                    <span class="rate-app">4.7</span>
-                </a>
-
-                <a href="" class="col-2 container__app">
-                    <div class="container__image-app">
-                        <img src="/images/empty.png" alt="" class="image-app">
-                    </div>
-                    <p class="name-app">Name App</p>
-                    <span class="rate-app">4.7</span>
-                </a>
-
-                <a href="" class="col-2 container__app">
-                    <div class="container__image-app">
-                        <img src="/images/empty.png" alt="" class="image-app">
-                    </div>
-                    <p class="name-app">Name App</p>
-                    <span class="rate-app">4.7</span>
-                </a>
-                <!--  -->
-                </div>
+                <div class="grid__row users-app-container"></div>
             </div>
 
             <!-- Favorites app -->
-            <div id="favorite"></div>
+            <div id="favorite" class="container__list-apps">
+                <div class="grid__row favorite-app-container"></div>
+            </div>
 
             <!-- Wish list -->
             <div id="wishlist"></div>

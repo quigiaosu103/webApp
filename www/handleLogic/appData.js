@@ -170,6 +170,7 @@ function sameTypeApps() {
   }, 'json')
 }
 
+
 sameTypeApps()
 handleLike()
 
