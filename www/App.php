@@ -140,7 +140,7 @@
         </a>
         <div id = "rateBox">
             <?php
-                $starNum = 4;
+                $starNum = 2;
                 $totalStar = 5;
                 for ($i = 1; $i <= $starNum;$i++){
                     echo "<i class = 'fas rate'> &#xf005; </i>";

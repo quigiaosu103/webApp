@@ -17,7 +17,8 @@ function renderCmt() {
             <img src="./images/defaultAvatar.png" alt="User" style="width:40px;margin: 0 0 0 20px;" class="rounded-pill"> 
           </span>
           <div id = "chat">
-              ${cmt.content}
+            <div id="rateBox" style="margin: 0; padding: 0">${renderStar(cmt.vote)}</div>
+            <span clas="cmt__content" style="margin-left: 12px; font-weight: 500">${cmt.content}</span>
           </div>
           <button onclick = "removeCmt(this)" class="btn btn-primary deleteCmt">Delete</button>
         </div>
@@ -31,12 +32,27 @@ function renderCmt() {
             <span style="font-weight: 500; margin-left: 12px;" class="comment__userName">${cmt.userName}</span>
           </span>
           <div id = "chat">
-              ${cmt.content}
+            <div id="rateBox" style="margin: 0; padding: 0">${renderStar(cmt.vote)}</div>
+            <span clas="cmt__content" style="margin-left: 12px; font-weight: 500">${cmt.content}</span>
           </div>
         </div>
       `})
   
   document.querySelector('.cmts').innerHTML = html.join('')
+}
+
+function renderStar(num) {
+  let starNum = num
+  let totalStar = 5;
+  let html=''
+  for (let i = 1; i <= starNum;i++){
+      html+= "<i class = 'fas rate'> &#xf005; </i>"
+      totalStar = totalStar - 1;
+  }
+  for (let i = 1; i <= totalStar;i++){
+      html+= "<i class = 'far rate'> &#xf005; </i>"
+  }
+  return html;
 }
 
 function addComment() {

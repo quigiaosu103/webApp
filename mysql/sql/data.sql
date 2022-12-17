@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysql-server
--- Generation Time: Dec 15, 2022 at 02:12 AM
+-- Generation Time: Dec 17, 2022 at 09:50 AM
 -- Server version: 8.0.27
 -- PHP Version: 8.0.19
 
@@ -36,16 +36,16 @@ END$$
 --
 CREATE DEFINER=`root`@`%` FUNCTION `CREATE_APPID` (`appType` CHAR(10)) RETURNS CHAR(10) CHARSET utf8mb4 DETERMINISTIC BEGIN
     DECLARE num INT;
-  SELECT COUNT(*) INTO NUM from apps WHERE TYPE = appType;
+	SELECT COUNT(*) INTO NUM from apps WHERE TYPE = appType;
     SET NUM = NUM +1;
     IF NUM>1000 THEN
-      RETURN CONCAT(appType, CAST(NUM AS CHAR(4)));
+    	RETURN CONCAT(appType, CAST(NUM AS CHAR(4)));
     END IF;
     IF NUM>100 THEN
-      RETURN CONCAT(appType, '0', CAST(NUM AS CHAR(3)));
+    	RETURN CONCAT(appType, '0', CAST(NUM AS CHAR(3)));
     END IF;
     IF NUM>10 THEN
-      RETURN CONCAT(appType, '00', CAST(NUM AS CHAR(2)));
+    	RETURN CONCAT(appType, '00', CAST(NUM AS CHAR(2)));
     END IF;
     RETURN CONCAT(appType, '000', CAST(NUM AS CHAR(1)));
 END$$
@@ -79,10 +79,10 @@ CREATE TABLE `apps` (
 
 INSERT INTO `apps` (`id`, `appName`, `srcDownload`, `srcImage`, `decsription`, `download`, `userName`, `DATEUP`, `TYPE`, `isConfirmed`, `size`, `vote`) VALUES
 (27, 'Lazada', 'https://d.apkpure.com/b/APK/com.lazada.android?version=latest', '/appContainer/images/ms/lazada.png', 'Tải app Lazada - Trải nghiệm mua sắm online tiện lợi & nhiều ưu đãi.', 0, 'giaosu', '2022-11-17 11:09:36', 'ms', 1, '82.2Mb', 0),
-(28, 'Đấu trường chân lý', 'https://d.apkpure.com/b/APK/com.riotgames.league.teamfighttactics?version=latest', '/appContainer/images/gms/tft.jpg', 'Trò chơi chiến thuật được phát triển bởi RiotGames', 50, 'giaosu', '2022-11-17 11:10:41', 'gms', 1, '67.5Mb', 0),
+(28, 'Đấu trường chân lý', 'https://d.apkpure.com/b/APK/com.riotgames.league.teamfighttactics?version=latest', '/appContainer/images/gms/tft.jpg', 'Trò chơi chiến thuật được phát triển bởi RiotGames', 50, 'giaosu', '2022-11-17 11:10:41', 'gms', 1, '67.5Mb', 4),
 (29, 'Gojeck', 'https://d.apkpure.com/b/APK/com.gojek.app?version=latest', '/appContainer/images/dv/gojeck.png', 'Giấy tờ đơn giản, đăng ký dễ dàng. Thưởng nóng cho Đối tác Tài xế mới. Thu nhập tới 40 triệu/tháng, thời gian làm việc linh hoạt, chủ động. đăng ký làm tài xế gojek.', 0, 'haiquan', '2022-11-17 11:12:01', 'dv', 1, '95.4Mb', 0),
 (30, 'Tiktok', 'https://d.apkpure.com/b/APK/com.ss.android.ugc.trill?version=latest', '/appContainer/images/mxh/tiktok.png', 'TikTok, được biết đến ở Trung Quốc với tên Douyin, là một dịch vụ lưu trữ video dạng ngắn thuộc sở hữu của công ty Trung Quốc ByteDance. Nó lưu trữ nhiều video do người dùng gửi, từ nội dung như trò đùa, pha nguy hiểm, thủ thuật, trò đùa và khiêu vũ, với thời lượng từ 15 giây đến mười phút.', 101, 'quivo01', '2022-11-17 11:20:00', 'mxh', 1, '180Mb', 0),
-(31, 'PUBG MOBILE', 'https://d.apkpure.com/b/APK/com.tencent.ig?version=latest', '/appContainer/images/gms/pubg.png', 'PUBG MOBILE là một tựa game bắn súng battle royale MIỄN PHÍ được hơn 1 tỷ người chơi trên toàn thế giới lựa chọn. Những trận chiến khốc liệt trong các trận đấu kéo dài 10 phút, chơi mọi lúc, mọi nơi!', 0, 'haiquan', '2022-11-17 14:03:37', 'gms', 1, '541.6Mb', 0),
+(31, 'PUBG MOBILE', 'https://d.apkpure.com/b/APK/com.tencent.ig?version=latest', '/appContainer/images/gms/pubg.png', 'PUBG MOBILE là một tựa game bắn súng battle royale MIỄN PHÍ được hơn 1 tỷ người chơi trên toàn thế giới lựa chọn. Những trận chiến khốc liệt trong các trận đấu kéo dài 10 phút, chơi mọi lúc, mọi nơi!', 0, 'haiquan', '2022-11-17 14:03:37', 'gms', 1, '541.6Mb', 4),
 (32, 'Twitter', 'https://d.apkpure.com/b/APK/com.twitter.android?version=latest', '/appContainer/images/mxh/twitter.png', ' Twitter cho phép bạn tìm kiếm nhưng người thú vị hoặc xây dựng một lượng theo dõi những người quan tâm đến bạn. Ngoài trò chuyện với bạn bè, Twitter cho phép những người có ảnh hưởng xây dựng kết nối cá nhân với người hâm mộ của họ. Nói chuyện trực tiếp với những người có ảnh hưởng đến bạn. Bạn sẽ ngạc nhiên khi nhận được rất nhiều phản hồi lại.', 0, 'giaosu', '2022-11-24 07:51:25', 'mxh', 1, '104.2Mb', 0),
 (33, 'Facebook', 'https://d.apkpure.com/b/APK/com.facebook.katana?version=latest', 'appContainer/images/mxh/facebook.png', 'Ứng dụng mạng xã hội', 102, 'giaosu', '2022-11-24 07:54:04', 'mxh', 1, '49.2Mb', 0),
 (34, 'Amazon Shopping', 'https://d.apkpure.com/b/APK/com.amazon.mShop.android.shopping?version=latest', '/appContainer/images/ms/amazon.png', 'Amazon.com, Inc. là một công ty công nghệ đa quốc gia của Mỹ tập trung vào thương mại điện tử, điện toán đám mây, quảng cáo trực tuyến, phát trực tuyến kỹ thuật số và trí tuệ nhân tạo', 99, 'giaosu', '2022-11-24 07:54:28', 'sm', 1, '73.1Mb', 0),
@@ -112,7 +112,6 @@ CREATE TABLE `comments` (
 --
 
 INSERT INTO `comments` (`userName`, `appId`, `content`, `timeComment`, `vote`) VALUES
-('giaosu', 28, 'good game', '2022-12-03 05:37:47', 4),
 ('giaosu', 33, 'Ung dung hay', '2022-11-29 06:59:34', 5),
 ('giaosu', 34, 'Ứng dụng tốt', '2022-12-05 00:22:56', 4),
 ('giaosu', 36, 'Q1 tốt, Q2 rìa, Q3 ác quá', '2022-11-26 14:35:28', 3),
@@ -139,12 +138,14 @@ CREATE TABLE `favorite` (
 INSERT INTO `favorite` (`userName`, `appId`, `isLiked`) VALUES
 ('giaosu', 27, 1),
 ('giaosu', 28, 1),
+('giaosu', 31, 1),
 ('giaosu', 33, 1),
 ('giaosu', 34, 1),
 ('giaosu', 36, 1),
 ('haitran05', 27, 1),
 ('haitran05', 43, 1),
-('quivo01', 28, 1);
+('quivo01', 28, 1),
+('quivo01', 31, 1);
 
 -- --------------------------------------------------------
 
@@ -174,6 +175,7 @@ CREATE TABLE `TYPES` (
 --
 
 INSERT INTO `TYPES` (`TYPEID`, `TYPENAME`) VALUES
+('book', 'Sách'),
 ('dv', 'Ứng dụng dịch vụ'),
 ('gms', 'Trò chơi'),
 ('ms', 'Ứng dụng mua sắm'),
@@ -202,20 +204,21 @@ CREATE TABLE `users` (
   `userPass` varchar(100) DEFAULT NULL,
   `userImage` varchar(200) DEFAULT NULL,
   `fullName` char(50) DEFAULT NULL,
-  `dateCreate` datetime DEFAULT CURRENT_TIMESTAMP
+  `dateCreate` datetime DEFAULT CURRENT_TIMESTAMP,
+  `email` char(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userName`, `userPass`, `userImage`, `fullName`, `dateCreate`) VALUES
-('admin', '123', NULL, 'Admin', '2022-11-10 00:00:00'),
-('giaosu', '1323', './image/h2.jpg', 'Quang Nguyễn', '2022-11-10 00:00:00'),
-('haiquan', '088', './image/h3.jpg', 'Quân Nguyễn', '2022-11-11 00:00:00'),
-('haitran05', '123', './dbas/dsad', 'Văn Hải', '2022-11-12 00:00:00'),
-('longnguyen', '123', './images/defaultAvatar.png', 'Long Nguyễn', '2022-11-12 00:00:00'),
-('quivo01', '123', './image/h1.jpg', 'Phú Quí', '2022-11-10 00:00:00');
+INSERT INTO `users` (`userName`, `userPass`, `userImage`, `fullName`, `dateCreate`, `email`) VALUES
+('admin', '123', 'null', 'Admin', '2022-11-10 00:00:00', 'null'),
+('giaosu', '1323', './image/h2.jpg', 'Quang Nguyễn', '2022-11-10 00:00:00', 'QuangNguyen@gmail.com'),
+('haiquan', '088', './image/h3.jpg', 'Quân Nguyễn', '2022-11-11 00:00:00', 'Quannguyen@gmail.com'),
+('haitran05', '123', './dbas/dsad', 'Văn Hải', '2022-11-12 00:00:00', 'haiga@gmail.com'),
+('longnguyen', '123', './images/defaultAvatar.png', 'Long Nguyễn', '2022-11-12 00:00:00', 'thanhlong@mgail.com'),
+('quivo01', '123', './image/h1.jpg', 'Phú Quí', '2022-11-10 00:00:00', 'qui@gmail.com');
 
 --
 -- Indexes for dumped tables

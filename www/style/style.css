@@ -452,11 +452,22 @@ img{
 
 
 
+
 @keyframes rotation {
     from {
       transform: rotate(0deg);
     }
     to {
-      transform: rotate(359deg);
+      transform: rotate(360deg);
     }
   }
+
+  
+/* @keyframes rotation {
+    from {
+        background-image: linear-gradient(0deg, #85FCBB, #1ED4ED);
+    }
+    to {
+        background-image: linear-gradient(180deg, #85FCBB, #1ED4ED);
+    }
+  } */
