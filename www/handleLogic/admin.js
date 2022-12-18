@@ -15,30 +15,30 @@ function renderData() {
 				<td class="ban ${ app.isConfirmed == 0 ? 'd-none': ''}"><button onclick="unConfrim(this)">Ban</button></td>
 				<td class="accept ${ app.isConfirmed == 1 ? 'd-none': ''}"><button onclick="confirm(this)">Accept</button></td>
 			</tr>`
-			$('.apps-list').append(html)
-			document.querySelector('.apps-statistical').classList.remove('d-none')
+			$('.apps-list').append(html) //add thẻ vào list hiển thị
+			document.querySelector('.apps-statistical').classList.remove('d-none') //ẩn hiện ô chứa dữ liệu của users và apps
 			document.querySelector('.users-statistical').classList.add('d-none')
 		});
 	}, "json")
 }
  
 
-
+//Xử lý duyệt ứng dụng
 function confirm(element) {
 	const parentElement = element.parentElement.parentElement
 	const appId = parentElement.querySelector('.id').textContent
 	const appName = parentElement.querySelector('.name').textContent
-	$.post('/Api/confirm.php', {
+	$.post('/Api/confirm.php', { 
 		appId: appId,
 		action: 'confirm'
 	}, () => {
-		parentElement.querySelector('.accept').classList.add('d-none')
+		parentElement.querySelector('.accept').classList.add('d-none') //ẩn hiện nút duyệt và ban khi thành công
 		parentElement.querySelector('.ban').classList.remove('d-none')
 		alert(`Duyệt thành công ứng dụng: ${appName}`)
 	}, 'json')
 }
 
-
+//Ban ứng dụng
 function unConfrim(element) {
 	const parentElement = element.parentElement.parentElement
 	const appId = parentElement.querySelector('.id').textContent
@@ -47,13 +47,13 @@ function unConfrim(element) {
 		appId: appId,
 		action: 'unConfirm'
 	}, () => {
-		parentElement.querySelector('.accept').classList.remove('d-none')
+		parentElement.querySelector('.accept').classList.remove('d-none')//ẩn hiện nút duyệt và ban khi thành công
 		parentElement.querySelector('.ban').classList.add('d-none')
 		alert(`Đã xóa ứng dụng ${appName}`)
 	}, 'json')
 }
 
-
+//Render user
 function renderUsers() {
 	document.querySelector('.users-list').innerHTML = ''
 	let html = ''
@@ -75,13 +75,15 @@ function renderUsers() {
 	}, "json")
 }
 
+//gán sự kiện click
 function addEvent() {
 	document.querySelector('.usersManager').addEventListener('click', e=> renderUsers())
 	document.querySelector('.appsManager').addEventListener('click',e=> renderData())
 }
 
+//Render các thống kê của sever
 function getStatistical() {
-	$.get('/Api/statistical.php', function(data) {
+	$.get('/Api/statistical.php', function(data) { //gọi api lấy data
 		console.log(data)
 		document.querySelector('.apps-statistical .statistical').innerHTML=`<tr>
 			<td>${data.apps.totalApps}</td>

@@ -4,11 +4,11 @@
 	$type = $_POST['type'] ?? 'gms';
 	$userName = $_POST['userName'] ?? '';
 	$sql = "SELECT * from apps";
-	if ($type != '')
+	if ($type != '')// nếu nhận được type thì select theo type
 		$sql = "select * from apps where TYPE = '" . $type . "'"; ;
-	if($role == 'user')
+	if($role == 'user') //role user chỉ select các ứng dụng đã duyệt
 		$sql = "SELECT * from apps where isConfirmed = 1";
-	if ($userName != '')
+	if ($userName != '') //nếu nhân được user name thì select theo user name
 		$sql = "select * from apps where userName = '" . $userName . "'";
 	$result = $conn->query($sql);
 	$data = array();

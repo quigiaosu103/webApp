@@ -126,7 +126,7 @@
                 1.000.00+
             </div>
             <i class="material-icons" style = "color:black;font-size:20px;">file_download</i>
-            <div id = "appSize">
+            <div id = "appSize"> 
                 200MB 
             </div>
             <i class="material-icons" style = "color:black;font-size:20px;">&#xe2c7;</i>
@@ -139,7 +139,7 @@
             Download
         </a>
         <div id = "rateBox">
-            <?php
+            <?php //hiền thị sao tương ứng với đánh giá trnung bình
                 $starNum = 2;
                 $totalStar = 5;
                 for ($i = 1; $i <= $starNum;$i++){

@@ -1,7 +1,7 @@
 // JS for reponsive
-if(document.getElementById("btn-category")){
-    nav = document.getElementById("nav");
-    btn_show = document.getElementById("btn-category");
+if(document.querySelector(".btn-category")){
+    nav = document.querySelector(".nav");
+    btn_show = document.querySelector(".btn-category");
     btn_close = document.getElementById("btn-close-category");
     btn_show.onclick = function(){
         nav.style.display = (nav.style.display != "block") ? "block":"none";
@@ -40,7 +40,7 @@ if(page==null){
     document.getElementById(page.concat("_category")).classList.add("category-active");
 }
 
-
+//render những ứng dụng của người dùng tải lên
 function getUsersApps(){
     $.post('./Api/getApps.php', {
         userName: userNameLogedin
@@ -57,7 +57,7 @@ function getUsersApps(){
         document.querySelector('.users-app-container').innerHTML = html.join('')
     }, 'json')
 }
-
+//render những ứng dụng yêu thích của người dùng
 function getFavoriteApps() {
     console.log('get')
     $.post('./Api/getFavoriteApps.php', {

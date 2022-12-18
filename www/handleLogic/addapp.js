@@ -211,8 +211,8 @@ $("#imageUpload").change(function() {
     readURL(this);
 });
 
-
-function logSubmit(event) {
+//Xử lý kiểm tra form upload file
+function logSubmit(event) { 
     const appname = document.getElementById("appname").value;   
     const apptype = document.getElementById("apptype").value;
     const apk = document.getElementById("apk").value;

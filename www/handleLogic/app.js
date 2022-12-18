@@ -42,6 +42,8 @@ window.onload = function() {
 
 };
 
+
+//thay đổi trạng thái của icon yêu thích
 function change(type){
     switch(type){
         case 1:{
@@ -155,6 +157,7 @@ function scrollDiv(btn,direction){
             break;
     }
 }
+
 
 function addCmt(x){
     let cmt = x.parentElement.children[1].value;

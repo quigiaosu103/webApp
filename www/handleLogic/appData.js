@@ -1,3 +1,7 @@
+//code để xứ lý dữ liệu cho trang thông tin của app
+
+
+//thực hiện render thông tin của app
 document.querySelector('.app-infor__name').innerText= data.app.appName;
 document.querySelector('.app-user').innerText= data.app.userName;
 document.querySelector('.downloadBtn').setAttribute('href', data.app.srcDownload)
@@ -8,9 +12,13 @@ console.log(data.app)
 const likeBtn = document.querySelector('.like')
 const unLikeBtn = document.querySelector('.unlike')
 
+
+//render bình luận của user
 function renderCmt() {
   const html = data.comment.map((cmt)=>{ 
+    //kiểm tra bình luận xem có phải của user hiện tại không 
     if(cmt.userName==userName){
+      //nếu là user hiện tại thì render ra thẻ bình luận có nút xóa
       document.querySelector('.myCmt').innerHTML=`
         <div class = "comment">
           <span style="text-decoration:none;">
@@ -25,6 +33,7 @@ function renderCmt() {
       `
       return ''
     }
+    //nếu không phải user hiện tại thì return về thẻ chứa thông tin user và bình luận
   return `
         <div class = "comment">
           <span style="text-decoration:none; min-width: 160px">
@@ -37,10 +46,12 @@ function renderCmt() {
           </div>
         </div>
       `})
-  
+  //Đưa các nình luận trong biến html vào ô chứa bình luận
   document.querySelector('.cmts').innerHTML = html.join('')
 }
 
+
+//render ra số sao với num là số sao được highlight
 function renderStar(num) {
   let starNum = num
   let totalStar = 5;
@@ -55,18 +66,18 @@ function renderStar(num) {
   return html;
 }
 
+//Thêm một bình luận mới
 function addComment() {
   const addBtn = document.querySelector('.addNewCmt')
   addBtn.addEventListener('click',(e)=>{
 
     const mess = document.querySelector('.new-comment>input').value
-
+    //kiểm tra nếu giá trị người dùng nhập vào không rỗng thì insert vào database
     if(mess) {
       $.post('/API/addCmt.php', {
         id: id,
         content: mess
       }, (data, status)=> {
-        console.log(data)
         document.querySelector('.cmts').innerHTML += `
           <div class="cmt">
             <div class="cmt__user">
@@ -89,28 +100,35 @@ function addComment() {
   })
 }
 
+//Xóa bình luận
 function removeCmt(e) {
   const element = e.parentElement
+  //Sử dụng post gọi tới removeItem
   $.post('/API/removeItem.php', {
-    type: 'cmt',
+    type: 'cmt', //xóa dữ liệu ở bảng comments
     id: id,
     userName: userName
   }, (data)=> {
+    //Xóa thành công dữ liệu ở database, ẩn thẻ vừa xóa đẻ k cần render lại
     element.style.display='none';
     document.querySelector('.new-comment>input').disabled = false
   }, 'json')
 }
 
+//Kiểm tra người dùng đã bình luận chưa
 function isCmted() {
     let isCmt =false
     data.comment.map((cmt)=>{
       if(cmt.userName == userName) isCmt = true
     })
     if(isCmt) {
+      //nếu bình luận rồi sẽ khóa ô bình luận lại
       document.querySelector('.userCommentHolder>input').disabled = true
     }
   
 }
+
+//hiển thị trạng thái nút yêu thích
 function handleLike() {
   if(data.count.count==1)
     change(1)
@@ -118,22 +136,20 @@ function handleLike() {
     change(2)
 }
 
+//Xử lý dữ liệu khi nhấn yêu thích
 function likeAction(type) {
   if(type ==0){
-    // likeBtn.addEventListener('click', (e) => {
-      if(userName === '') {
-        location.href = 'loginForm.php'
+      if(userName === '') { //kiểm tra nếu chưa đăng nhập thì chuyển tới trang đăng nhập
+        location.href = 'loginForm.php' 
       }else{
-        $.post('/API/removeItem.php', {
+        $.post('/API/removeItem.php', { //Gọi api insert thông tin vào bảng favorite
           type: 'like',
           id: id,
           userName: userName
         }, ()=> { 
         })
       }
-    // })
   }else{
-    // unLikeBtn.addEventListener('click', (e) => {
       if(userName === '') {
         location.href = 'loginForm.php'
       }else{
@@ -142,16 +158,16 @@ function likeAction(type) {
         }, ()=> {
         })
       }
-    // })
   }
   
   
 }
 
+//Render các ứng dụng cùng thể loại
 function sameTypeApps() {
   const appId = data.app.id
   console.log(data.app.TYPE)
-  $.post('./Api/getApps.php', {
+  $.post('./Api/getApps.php', { //gọi api lấy dữ liệu
     type: data.app.TYPE
   }, function(data){
     const html = data.data.map(app=> app.id != appId? `
@@ -166,26 +182,27 @@ function sameTypeApps() {
         </div>
       </a>
     `:'')
+    //render vào thẻ có id appBasket
     document.querySelector('#appBasket').innerHTML = html.join('')
   }, 'json')
 }
 
+//Thực hiện chức năng tìm kiếm
 function search() {
   const inputSearchElement = document.querySelector('#search')
   console.log('search: ', inputSearchElement)
   inputSearchElement.addEventListener('keypress', event => {
-      if (event.keyCode == 13) {
+      if (event.keyCode == 13) { //Khi ấn enter thì sẽ tìm kiếm
           const value = inputSearchElement.value
-          location.href= `Api/searchApps.php?data=${value}`
+          location.href= `Api/searchApps.php?data=${value}` //gọi api 
       }
     })
 }
 
+//Chạy các hàm
 search()
-
 sameTypeApps()
 handleLike()
-
 renderCmt()
 addComment()
 isCmted()

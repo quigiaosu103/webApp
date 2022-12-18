@@ -40,15 +40,15 @@
           <a 
             class="nav-link userNameSelection" 
             href="<?php
-              if(!isset($_SESSION['userName'])){
-                  $_SESSION['currPage'] = 'search.php';
+              if(!isset($_SESSION['userName'])){ //kiểm tra đăng nhập
+                  $_SESSION['currPage'] = 'search.php'; //lưu trang hiện tại để quay lại khi đăng nhập thành công
                   echo 'loginForm.php'; 
               }
             ?>"
           >
             <?php
               if(!isset($_SESSION['userName']))
-              echo 'Đăng nhập';
+              echo 'Đăng nhập'; //hiển thị 'đăng nhâp'/user name 
               else 
                 echo '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"/></svg>'.$_SESSION['userName'];
             ?>
@@ -56,7 +56,7 @@
 
       </a>
       <a href='admin/logout.php?currPage=search.php' class="logout">
-        <svg svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96C43 32 0 75 0 128V384c0 53 43 96 96 96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H96c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32h64zM504.5 273.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32H320v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z"/></svg>
+        <svg svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96C43 32 0 75 0 128V384c0 53 43 96 96 96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H96c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32h64zM504.5 273.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32H320v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z"/></svg>
         Đăng xuất
       </a>
         </span>
@@ -64,7 +64,7 @@
 
         <a 
           class="navbar-brand" href="<?php
-            if(isset($_SESSION['userName']))
+            if(isset($_SESSION['userName']))//kiểm tra đăng nhập
               echo './user.php';
             else{ 
               $_SESSION['currPage'] = 'search.php';
@@ -89,12 +89,13 @@
   <div class="footer">
     <span>Laptrinhwebungdung@tdtu</span>
   </div>
-<script>
-    const data = <?php
-      echo $_SESSION['searchData']?? ''
-    ?>
-</script>
-<script defer src="/handleLogic/search.js"></script>
+
+  <script>
+      const data = <?php
+        echo $_SESSION['searchData']?? '' //lấy data từ session được lưu bởi searchApps.php
+      ?>
+  </script>
+  <script defer src="/handleLogic/search.js"></script>
       
 </body>
 </html>

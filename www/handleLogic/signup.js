@@ -1,3 +1,4 @@
+//xử lý kiểm tra form đăng ký
 function handleSignUpFrom() {
     const submitBtn = document.getElementById("submitBtn");
     submitBtn.addEventListener("click", (e) => {
@@ -82,6 +83,7 @@ function handleSignUpFrom() {
     })
 }
 
+//xử lý kiểm tra form đăng nhập
 function check2(){
     var frm = document.forms['frm']
     var pws = frm.psw;

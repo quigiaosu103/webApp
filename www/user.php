@@ -1,95 +1,65 @@
 <?php
-    session_start();
-    if (isset($_POST['upload'])) {
-        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
+session_start();
+if (isset($_POST['upload'])) {
+    function upload($file) // ham upload dung de upload file, moi file sinh ra ten ngau nhien de tranh bi trung
+    {
+        $name = $file['name']; // lay ten file upload
+        $ex = substr($name, strrpos($name, '.')); // lay phan duoi cua file
 
-        function upload($file) {
-            $name = $file['name'];
-            $ex = substr($name, strrpos($name, '.'));
-
-            $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-            $uploadPathImg = "appContainer/images/Img/";
-            $uploadPathFile = "appContainer/File/";
-
-            if ($ex == '.png' || $ex == '.jpg') {
-                $srcDownload = $uploadPathImg.generate_string($permitted_chars).$ex;
-                move_uploaded_file($file["tmp_name"], $srcDownload);
-            }
-            else {
-                $srcDownload = $uploadPathFile.generate_string($permitted_chars).$ex;
-                move_uploaded_file($file["tmp_name"], $srcDownload);
-            }
-        }
-        
-        function generate_string($input, $strength = 16) {
-            $input_length = strlen($input);
-            $random_string = '';
-            for($i = 0; $i < $strength; $i++) {
-                $random_character = $input[mt_rand(0, $input_length - 1)];
-                $random_string .= $random_character;
-            }
-         
-            return $random_string;
-        }
-
-        require_once('./admin/connection.php');
-    
-
+        $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz'; // danh sach ki tu 
         $uploadPathImg = "appContainer/images/Img/";
-        $uploadPathFile = "appContainer/File/";
+        $uploadPathFile = "appContainer/apps/appUpload";
 
-        $appname = $_POST['appname'];
-        $apptype = $_POST['apptype'];
-        $description = $_POST['description'];
-        
-        $apk = $_FILES["apk"];
-        $icon = $_FILES['icon'];
-        $appimage = $_FILES['appimage'];
-        $size = $apk['size'];
-
-
-        // doi ten file khi upload file
-        $apkName = $_FILES["apk"];
-
-        // echo substr($apkName['name'], strrpos($apkName['name'], '.'));
-        // echo substr($apk['name'], strrpos($apk['name'], '.'));
-        // echo substr($icon['name'], strrpos($icon['name'], '.'));
-
-        upload($apk);
-        upload($icon);
-        upload($appimage);
-
-        // $apkdoc = explode('.', $apkName);
-        // echo($apkdoc);
-        // $iconName = $_FILES['icon'];
-        // $iconName = explode('.', $iconName);
-        // $appimageName = $_FILES['appimage'];
-        // $appimageName = explode('.', $appimageName);
-        
-        // $extApk = end($apkName);    
-        // $extIcon = end($iconName);
-        // $extAppImage = end($appimageName);
-
-        // $newApkName = md5(uniqid()).'.'.$extApk;
-        // $newIconName = md5(uniqid()).'.'.$extIcon;
-        // $newAppImageName = md5(uniqid()).'.'.$extAppImage;
-
-        // $srcDownload = $uploadPathFile.$apk['name'];
-        // $srcImage = $uploadPathImg.$appimage['name'];
-        
-        // move_uploaded_file($apk["tmp_name"], $srcDownload);
-        // move_uploaded_file($appimage["tmp_name"], $srcImage);
-        // move_uploaded_file($icon["tmp_name"], $uploadPath.$icon['name']);
-
-        // $data = "('$appname','$srcDownload','$srcImage', '$description', '', '$apptype', '$size')";
-        // $sqll = "INSERT INTO `apps`(`appName`, `srcDownload`, `srcImage`, `decsription`,`userName`,`TYPE`,`size`) VALUES ".$data;
-        // if ($conn->query($sqll) === TRUE) {
-        //     header("link trang chu"); // dua link trang chu de chay vao
-        //     exit();
-        // } else {
-        //    $error = "$conn->error";
-        // }
+        if ($ex == '.png' || $ex == '.jpg') { // neu la file anh thi vao 
+            $srcDownload = $uploadPathImg . generate_string($permitted_chars) . $ex;
+            move_uploaded_file($file["tmp_name"], $srcDownload);
+        }
+        if ($ex == '.zip') { // neu là file zip thi vao file
+            $srcDownload = $uploadPathFile . generate_string($permitted_chars) . $ex;
+            move_uploaded_file($file["tmp_name"], $srcDownload);
+        }
     }
+
+    function generate_string($input, $strength = 16) // ham sinh ten tu dong de tranh trung ten
+    {
+        $input_length = strlen($input);
+        $random_string = '';
+        for ($i = 0; $i < $strength; $i++) {
+            $random_character = $input[mt_rand(0, $input_length - 1)];
+            $random_string .= $random_character;
+        }
+
+        return $random_string;
+    }
+
+    $host = 'mysql-server';
+    $user = 'root';
+    $pass = 'root';
+    $db = 'apps-management';
+
+    $conn = new mysqli($host, $user, $pass, $db);
+    $conn->set_charset("utf8");
+
+    if ($conn->connect_error) {
+        die('Không thể kết nối database: ' . $conn->connect_error);
+    }
+
+    $uploadPathImg = "appContainer/images/"; // dia chi file img
+    $uploadPathFile = "appContainer/apps/"; // dia chi file app
+
+    $appname = $_POST['appname'];
+    $apptype = $_POST['apptype'];
+    $description = $_POST['description'];
+
+
+    $apk = $_FILES["apk"];
+    $icon = $_FILES['icon'];
+    $appimage = $_FILES['appimage'];
+
+    upload($apk);
+    upload($icon);
+    upload($appimage);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -176,15 +146,17 @@
                             <label class="add-app__label col-3" for="apptype">App type:</label>
                             <select class="add-app__input col-5" name="apptype" id="apptype">
                                 <option value=""></option>
-                                <option value="social">Social</option>
-                                <option value="game">Game</option>
-                                <option value="other">Other</option>
+                                <option value="mxh">Mạng xã hội</option>
+                                <option value="gms">Trò chơi</option>
+                                <option value="bk">Sách</option>
+                                <option value="dv">Ứng dụng dịch vụ</option>
+                                <option value="ms">Ứng dụng mua sắm</option>
                             </select>
                         </div>
                         <!--  -->
                         <div class="add-app__group-input grid__row">
                             <label class="add-app__label col-3" for="apk">Upload file .apk:</label>
-                            <input name="apk" id="apk" type="file" class="add-app__input col-5" accept=".zip .apk"/>
+                            <input name="apk" id="apk" type="file" class="add-app__input col-5" accept=".zip"/>
                         </div>
                         <!--  -->
                         <div class="add-app__group-input grid__row">
@@ -283,5 +255,6 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="/handleLogic/user.js"></script>
+    <script src="/handleLogic/addapp.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+//data được truyền từ file search.php
+//render data, hiển thị kết quả tìm kiếm
 function searchHandle() {
     let html = data.data.map((app, id)=> `
     <a class="common-app" href="App.php?id=${app.id}">
@@ -18,12 +20,12 @@ function search() {
     const inputSearchElement = document.querySelector('#search')
     console.log('search: ', inputSearchElement)
     inputSearchElement.addEventListener('keypress', event => {
-        if (event.keyCode == 13) {
+        if (event.keyCode == 13) { //tìm kiếm khi ấn enter
             const value = inputSearchElement.value
             location.href= `Api/searchApps.php?data=${value}`
         }
       })
   }
   
-  search()
+search()
 searchHandle()
