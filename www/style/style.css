@@ -307,7 +307,8 @@ nav {
 .favorite-apps__list-app {
     display: flex;
     margin-left: 16px;
-    padding: 12px;
+    padding: 5px;
+    align-items: center;
 }
 
 .favorite-apps__list-app:hover {

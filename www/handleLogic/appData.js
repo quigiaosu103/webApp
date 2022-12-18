@@ -1,13 +1,17 @@
 //code để xứ lý dữ liệu cho trang thông tin của app
 
-
+//data được lấy từ đoạn script của file app.php
 //thực hiện render thông tin của app
+
 document.querySelector('.app-infor__name').innerText= data.app.appName;
 document.querySelector('.app-user').innerText= data.app.userName;
 document.querySelector('.downloadBtn').setAttribute('href', data.app.srcDownload)
 document.querySelector('.app-image img').setAttribute('src', data.app.srcImage)
 document.querySelector('.about-text').innerHTML = data.app.decsription
+document.querySelector('#appSize').innerHTML = data.app.size
+document.querySelector('#appDownload').innerHTML = data.app.download
 document.querySelector('.update-text').innerHTML = `Last update: ${data.app.DATEUP}`
+document.querySelector('.desImg').style.backgroundImage= `url(${data.app.desImg})`
 console.log(data.app)
 const likeBtn = document.querySelector('.like')
 const unLikeBtn = document.querySelector('.unlike')
@@ -15,8 +19,10 @@ const unLikeBtn = document.querySelector('.unlike')
 
 //render bình luận của user
 function renderCmt() {
+  console.log(data.commnet)
   const html = data.comment.map((cmt)=>{ 
     //kiểm tra bình luận xem có phải của user hiện tại không 
+    
     if(cmt.userName==userName){
       //nếu là user hiện tại thì render ra thẻ bình luận có nút xóa
       document.querySelector('.myCmt').innerHTML=`
@@ -44,6 +50,7 @@ function renderCmt() {
             <div id="rateBox" style="margin: 0; padding: 0">${renderStar(cmt.vote)}</div>
             <span clas="cmt__content" style="margin-left: 12px; font-weight: 500">${cmt.content}</span>
           </div>
+          ${userName=='admin'? '<button onclick = "removeCmt(this)" class="btn btn-primary deleteCmt">Delete</button>':''}
         </div>
       `})
   //Đưa các nình luận trong biến html vào ô chứa bình luận
@@ -171,8 +178,8 @@ function sameTypeApps() {
     type: data.app.TYPE
   }, function(data){
     const html = data.data.map(app=> app.id != appId? `
-      <a href=' href="App.php?id=${app.id}' class='app-type__game--containt app-containt col-4'>
-        <div class='game-containt__img img-color'></div>
+      <a href="App.php?id=${app.id}" class='app-type__game--containt app-containt col-4'>
+        <div class='game-containt__img img-color' style="background-image: url(${app.desImg}); background-position: center; background-size: cover;"d></div>
         <div class='infor'>
           <div class='main-img'><img src='${app.srcImage}' width='56' height='56' border-radius='4'></image></div>
           <div class='infor-text'>

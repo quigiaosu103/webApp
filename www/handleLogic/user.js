@@ -46,7 +46,7 @@ function getUsersApps(){
         userName: userNameLogedin
     }, data=> {
         const html = data.data.map(app=> `
-            <a href="" class="col-2 container__app">
+            <a href="App.php?id=${app.id}" class="col-2 container__app">
                 <div class="container__image-app">
                     <img src="${app.srcImage}" alt="" class="image-app">
                 </div>
@@ -64,7 +64,7 @@ function getFavoriteApps() {
         userName: userNameLogedin
     }, data=> {
         const html = data.data.map(app=> `
-        <a href="" class="col-2 container__app">
+        <a href="App.php?id=${app.id}" class="col-2 container__app">
             <div class="container__image-app">
                 <img src="${app.srcImage}" alt="" class="image-app">
             </div>

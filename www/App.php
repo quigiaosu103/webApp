@@ -85,7 +85,7 @@
 
       </a>
       <a href='admin/logout.php?currPage=app.php' class="logout">
-        <svg svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96C43 32 0 75 0 128V384c0 53 43 96 96 96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H96c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32h64zM504.5 273.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32H320v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z"/></svg>
+        <svg svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M160 96c17.7 0 32-14.3 32-32s-14.3-32-32-32H96C43 32 0 75 0 128V384c0 53 43 96 96 96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H96c-17.7 0-32-14.3-32-32l0-256c0-17.7 14.3-32 32-32h64zM504.5 273.4c4.8-4.5 7.5-10.8 7.5-17.4s-2.7-12.9-7.5-17.4l-144-136c-7-6.6-17.2-8.4-26-4.6s-14.5 12.5-14.5 22v72H192c-17.7 0-32 14.3-32 32l0 64c0 17.7 14.3 32 32 32H320v72c0 9.6 5.7 18.2 14.5 22s19 2 26-4.6l144-136z"/></svg>
         Đăng xuất
       </a>
         </span>
@@ -94,7 +94,10 @@
         <a 
           class="navbar-brand" href="<?php
             if(isset($_SESSION['userName']))
-              echo './user.php';
+                if ($_SESSION['userName'] == 'admin')
+                    echo 'admin.php';
+                else
+                    echo './user.php';
             else{ 
               $_SESSION['currPage'] = 'app.php';
               echo 'loginForm.php'; 
@@ -123,11 +126,11 @@
 
         <div id = "dlsBox">
             <div id = "appDownload">
-                1.000.00+
+                
             </div>
             <i class="material-icons" style = "color:black;font-size:20px;">file_download</i>
             <div id = "appSize"> 
-                200MB 
+                
             </div>
             <i class="material-icons" style = "color:black;font-size:20px;">&#xe2c7;</i>
             
@@ -161,12 +164,9 @@
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div style="background-image: url('./images/tft.jpg');" class="carousel-item active">
+                <div style="background-image: url('');" class="carousel-item active desImg">
                 </div>
-                <div style="background-image: url('./images/pubg.jpg');" class="carousel-item">
-                </div>
-                <div style="background-image: url('./images/fo4.jpg');" class="carousel-item">
-                </div>
+               
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -225,7 +225,7 @@
         
         <div class = "userCommentHolder">
             <a href = "javascript:void(0)" style="text-decoration:none;">
-                <img src="appContainer/images/gms/tft.jpg" alt="User" style="width:40px;margin: 0 0 0 20px;" class="rounded-pill"> 
+                <img src="/images/defaultAvatar.png" alt="User" style="width:40px;margin: 0 0 0 20px;" class="rounded-pill"> 
             </a>
             <input type="text" placeholder="Add comment...">
             <button class="btn btn-primary addNewCmt" onclick = "addCmt(this)">Comment</button>

@@ -65,7 +65,10 @@
         <a 
           class="navbar-brand" href="<?php
             if(isset($_SESSION['userName']))//kiểm tra đăng nhập
-              echo './user.php';
+              if ($_SESSION['userName'] == 'admin')
+                echo 'admin.php';
+              else
+                echo './user.php';
             else{ 
               $_SESSION['currPage'] = 'search.php';
               echo 'loginForm.php'; 

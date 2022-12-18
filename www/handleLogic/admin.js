@@ -3,6 +3,7 @@ function renderData() {
 	document.querySelector('.apps-list').innerHTML = ''
 	let html = ''
 	$.get('/Api/getApps.php', function(data, status) {
+		console.log(data)
 		data.data.forEach((app, index) => {
 			let html = `<tr>
 				<td class="id" style="display: none;">${app.id}</td>

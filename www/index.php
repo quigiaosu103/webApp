@@ -68,8 +68,11 @@
 
         <a 
           class="navbar-brand" href="<?php
-            if(isset($_SESSION['userName']))
-              echo './user.php';
+          if (isset($_SESSION['userName']))
+            if ($_SESSION['userName'] == 'admin')
+              echo 'admin.php';
+              else
+                echo './user.php';
             else{ 
               $_SESSION['currPage'] = 'index.php';
               echo 'loginForm.php'; 

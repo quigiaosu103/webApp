@@ -61,19 +61,6 @@ function change(type){
             }
             break;
         }
-        case 2:{
-            if (fav == 0){
-                document.getElementById("favorite").className = "fas";
-                document.getElementById("favorite").style.color = "orange";
-                fav = 1;
-            }
-            else{
-                document.getElementById("favorite").className = "far";
-                document.getElementById("favorite").style.color = "black";
-                fav = 0;
-            }
-            break;
-        }
     }
 
 };
